@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hriddhix. Design. Create. Inspire.</title>
+<meta name="description" content="Hriddhix. We are a creative design studio specializing in branding, motion graphics, social media marketing, print design and video production.">
+<style>
+  @font-face{
+    font-family:'Sequel Sans Head';
+    src:url(assets/fonts/font_001.otf) format('opentype');
+    font-weight:300; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Sequel Sans Subhead';
+    src:url(assets/fonts/font_002.otf) format('opentype');
+    font-weight:200; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Sequel Sans Body';
+    src:url(assets/fonts/font_003.otf) format('opentype');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Sequel Sans Bold Head';
+    src:url(assets/fonts/font_004.otf) format('opentype');
+    font-weight:500; font-style:normal; font-display:swap;
+  }
+  .inspire-bold{
+    font-family:'Sequel Sans Bold Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:500;
+  }
+  @font-face{
+    font-family:'Sequel Sans Book Head';
+    src:url(assets/fonts/font_005.otf) format('opentype');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Paralucent Light';
+    src:url(assets/fonts/font_006.otf) format('opentype');
+    font-weight:300; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Paralucent Text Book';
+    src:url(assets/fonts/font_007.otf) format('opentype');
+    font-weight:400; font-style:normal; font-display:swap;
+  }
+  @font-face{
+    font-family:'Paralucent ExtraLight';
+    src:url(assets/fonts/font_008.otf) format('opentype');
+    font-weight:200; font-style:normal; font-display:swap;
+  }
+  :root{
+    --white:#FFFFFF;
+    --page-bg:#E5DAD1;
+    --black:#111111;
+    --heading:#270306;
+    --brand-dark:#270306;
+    --purple:#111111;
+    --purple-soft:#F2F2F2;
+    --grey:#000000;
+    --grey-line:#E7E7E9;
+    --off:#E5DAD1;
+    --ease: cubic-bezier(.22,1,.36,1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0; cursor:none !important; font-synthesis:none;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family: "Sequel Sans Book Head", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background:var(--page-bg);
+    color:var(--black);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* Typography roles (Paralucent family): headlines/logo/names use Sequel Sans Head
+     (mapped to Paralucent Light), buttons/tabs/labels use Sequel Sans Bold Head
+     (mapped to Paralucent Medium, "only where necessary"), and Sequel Sans Book Head
+     (mapped to Paralucent Text Book) is used for everything else across the site,
+     including nav, subheads, tags, labels and body copy. */
+  h1, h2, h3, h4, h5, h6,
+  .logo, .testi-name, .footer-brand .logo{
+    font-family:'Sequel Sans Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .btn-outline, .portfolio-tabs button, .why-item span.label{
+    font-family:'Sequel Sans Bold Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .nav-links a, .nav-cta{
+    font-family:'Paralucent Light', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .eyebrow, .section-tag, .portfolio-category, .portfolio-group-tag, .portfolio-subtabs button,
+  .f-num, .s-tags span, .pc-tag, .footer-col h5, .testi-role,
+  .process-step .p-dot, .contact-meta a, .contact-meta span, .form-field label{
+    font-family:'Sequel Sans Book Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer; border:none; background:none;}
+
+  ::selection{background:var(--purple); color:var(--white);}
+
+  :focus-visible{outline:2px solid var(--purple); outline-offset:3px;}
+
+  .container{
+    width:100%;
+    max-width:1720px;
+    margin:0 auto;
+    padding:0 48px;
+    position:relative;
+    z-index:3;
+  }
+
+  /* ---------- Scroll progress ---------- */
+  .scroll-progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:var(--purple); z-index:9999; transition:width .1s linear;
+  }
+
+  /* ---------- Cursor dot ---------- */
+  /* Single custom cursor: a circle that stays visible on any background —
+     light or dark — via mix-blend-mode:difference, which auto-inverts
+     against whatever is underneath it (no manual per-section detection
+     needed). The browser's default cursor is hidden globally (see html/body
+     below). On interactive elements it grows, same as before. */
+  .cursor-dot{
+    position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
+    background:#fff; opacity:0; pointer-events:none; z-index:9999;
+    transform:translate(-50%,-50%); mix-blend-mode:difference;
+    transition:opacity .2s ease, width .2s ease, height .2s ease, background .2s ease;
+  }
+  .cursor-dot.active{opacity:1;}
+  .cursor-dot.grow{width:42px; height:42px; background:#fff;}
+  @media (hover:none), (max-width:900px){
+    .cursor-dot{display:none;}
+    *{cursor:auto !important;}
+  }
+
+  /* ---------- Rain overlay ---------- */
+
+
+  header.nav{
+    position:fixed; top:0; left:0; width:100%; z-index:1000;
+    padding:28px 0;
+    transition:padding .5s var(--ease);
+    background:transparent;
+    mix-blend-mode:difference;
+  }
+  header.nav.scrolled{
+    padding:16px 0;
+  }
+  .nav-inner{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px;}
+  .logo-group{position:relative; width:230px; height:56px; flex-shrink:0; justify-self:start;}
+  .logo-group img{
+    position:absolute; top:50%; left:0; transform:translateY(-50%);
+    transition:opacity .5s var(--ease);
+    filter:invert(1);
+  }
+  .logo-full{height:46px; width:auto; opacity:0;}
+  .logo-mono{height:70px; width:auto; opacity:0; transition:opacity .4s var(--ease);}
+  header.nav.show-h-icon .logo-mono{opacity:1;}
+  .nav-links{
+    position:relative;
+    display:flex; gap:40px; align-items:center; justify-self:center;
+    max-width:900px; overflow:hidden; opacity:1; padding-bottom:8px;
+    transition:max-width .5s var(--ease), opacity .4s var(--ease);
+  }
+  header.nav.scrolled .nav-links{
+    max-width:0; opacity:0; pointer-events:none;
+  }
+  .nav-links a{
+    font-size:16px; font-weight:300; letter-spacing:.8px; position:relative;
+    color:#fff; white-space:nowrap; padding-bottom:8px; text-transform:uppercase;
+    line-height:1; display:inline-block;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:100%; height:1.5px;
+    background:#fff; transform:scaleX(0); transform-origin:left;
+    transition:transform .28s var(--ease);
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after{
+    transform:scaleX(1);
+  }
+  /* While the pointer is anywhere inside the nav, the active item's underline
+     is suppressed unless it's the one actually being hovered — this keeps
+     exactly one underline visible at a time. It reappears on the active item
+     once the pointer leaves the nav entirely. */
+  .nav-links.hovering a.active:not(:hover)::after{
+    transform:scaleX(0);
+  }
+  .nav-right{display:flex; align-items:center; gap:26px; justify-self:end;}
+  .nav-cta{
+    font-size:16px; font-weight:300; letter-spacing:.8px; color:#fff;
+    white-space:nowrap; padding-bottom:8px; position:relative; text-transform:uppercase;
+    line-height:1; display:inline-block; overflow:hidden;
+    max-width:240px; opacity:1;
+    transition:max-width .5s var(--ease), opacity .4s var(--ease);
+  }
+  /* Only shown at the very top of the page — same collapse treatment as the
+     nav links, so it hides smoothly on scroll and reappears smoothly when
+     the user scrolls back up to the top. */
+  header.nav.scrolled .nav-cta{
+    max-width:0; opacity:0; pointer-events:none;
+  }
+  .nav-cta::after{
+    content:''; position:absolute; left:0; bottom:0; width:100%; height:1.5px;
+    background:#fff; transform:scaleX(0); transform-origin:left;
+    transition:transform .28s var(--ease);
+  }
+  .nav-cta:hover::after{
+    transform:scaleX(1);
+  }
+  .nav-toggle{
+    display:none; flex-direction:column; gap:5px; width:32px; z-index:1100;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  header.nav.scrolled .nav-toggle{display:flex; opacity:1; pointer-events:auto;}
+  .nav-toggle span{height:2px; width:100%; background:#fff; transition:all .3s ease;}
+
+  .mobile-menu-backdrop{
+    position:fixed; inset:0; background:rgba(39,3,6,.4); z-index:1040;
+    opacity:0; pointer-events:none; transition:opacity .4s var(--ease);
+  }
+  .mobile-menu-backdrop.open{opacity:1; pointer-events:auto;}
+
+  .mobile-menu{
+    position:fixed; top:0; right:0; height:100vh; width:min(420px,86vw);
+    background:var(--page-bg); z-index:1050; box-shadow:-16px 0 50px rgba(0,0,0,.15);
+    display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start; gap:28px;
+    padding:110px 48px 40px; overflow-y:auto;
+    transform:translateX(100%); transition:transform .5s var(--ease);
+    mix-blend-mode:normal; isolation:isolate;
+  }
+  .mobile-menu.open{transform:translateX(0);}
+  .mobile-menu a{font-size:32px; font-weight:400; color:var(--black); text-transform:uppercase; letter-spacing:.5px;}
+  .mobile-menu .logo-group{position:static; width:auto; height:auto; margin-bottom:20px;}
+  .mobile-menu .logo-group img{position:static; transform:none; height:32px; opacity:1; filter:none; mix-blend-mode:normal;}
+  .mobile-menu .logo-mono{display:none;}
+
+  @media (max-width:900px){
+    .nav-links, .nav-cta{display:none;}
+    .nav-toggle{
+      display:flex; opacity:1; pointer-events:auto;
+      position:fixed; top:24px; right:clamp(16px,5vw,24px); left:auto;
+    }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100vh; position:relative; display:flex; align-items:center;
+    padding-top:120px; overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0; opacity:.9;
+  }
+  .hero-bg svg{width:100%; height:100%;}
+
+  .hero-inner-v2{
+    position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
+    text-align:center; width:100%;
+  }
+
+  /* Centered HRIDDHIX wordmark — the main visual focus of the hero */
+  .hero-logo-wrap{
+    display:flex; justify-content:center; width:100%;
+    opacity:0; animation:fadeUp .9s var(--ease) forwards; animation-delay:.15s;
+    transition:opacity .5s var(--ease), transform .5s var(--ease);
+  }
+  .hero-wordmark{ height:clamp(45px,7.5vw,115px); width:auto; max-width:92vw; }
+
+  .hero-overview{
+    display:grid; grid-template-columns:140px minmax(0,420px); gap:32px; justify-content:center;
+    text-align:left; max-width:620px; width:100%; margin:56px auto 0;
+    opacity:0; animation:fadeUp .9s var(--ease) forwards; animation-delay:.5s;
+  }
+  .hero-overview-label{
+    font-family:'Paralucent Text Book', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:13px; font-weight:400; letter-spacing:2px; text-transform:uppercase; color:var(--grey);
+    padding-top:3px; white-space:nowrap;
+  }
+  .hero-overview-text{
+    font-family:'Paralucent Text Book', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:19px; font-weight:400; line-height:1.65; color:var(--grey); margin:0;
+  }
+
+  .hero-ctas-v2{
+    display:flex; align-items:center; gap:36px; margin-top:36px; justify-content:center;
+    opacity:0; animation:fadeUp .9s var(--ease) forwards; animation-delay:.75s;
+  }
+  @keyframes fadeUp{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+
+  /* Borderless, minimal text CTAs — no boxes, backgrounds, or outlines */
+  .hero-cta{
+    font-size:15px; font-weight:400; letter-spacing:.6px; text-transform:uppercase; color:var(--black);
+    position:relative; padding-bottom:5px; display:inline-flex; align-items:center; gap:6px;
+  }
+  .hero-cta::after{
+    content:''; position:absolute; left:0; bottom:0; width:100%; height:1px;
+    background:var(--brand-dark); transform:scaleX(0); transform-origin:left;
+    transition:transform .28s var(--ease);
+  }
+  .hero-cta:hover::after{ transform:scaleX(1); }
+  .hero-cta .arrow-ne{
+    display:inline-flex; width:18px; height:18px; transition:transform .3s var(--ease);
+  }
+  .hero-cta .arrow-ne svg{ width:100%; height:100%; display:block; }
+  .hero-cta-arrow:hover .arrow-ne{ transform:translate(2px,-2px); }
+
+  /* GET STARTED — solid black pill patch behind the CTA, white label, same
+     invert interaction used elsewhere on the site (e.g. the contact submit
+     button): black fills to white on hover, with the label flipping to black. */
+  .hero-cta-arrow{
+    background:var(--brand-dark); color:var(--white); padding:13px 26px 13px 28px;
+    border-radius:100px; border:1px solid var(--brand-dark);
+    transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .hero-cta-arrow::after{ content:none; }
+  .hero-cta-arrow .arrow-ne{ color:var(--white); transition:color .3s var(--ease), transform .3s var(--ease); }
+  .hero-cta-arrow:hover{ background:var(--white); color:var(--black); border-color:var(--brand-dark); }
+  .hero-cta-arrow:hover .arrow-ne{ color:var(--black); }
+
+  /* PORTFOLIO showcase — a giant, full-bleed typography patch that links into
+     the portfolio overlay. Same patch/invert treatment as the GET STARTED
+     pill (.hero-cta-arrow): solid dark fill + light label by default,
+     flipping to a light fill + dark label on hover, same duration/easing. */
+  .portfolio-giant{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+    width:100%; min-height:52vh; padding:64px 24px;
+    background:var(--brand-dark); border-top:1px solid var(--brand-dark); border-bottom:1px solid var(--brand-dark);
+    text-decoration:none;
+    transition:background .3s var(--ease), border-color .3s var(--ease);
+  }
+  .portfolio-giant:hover{ background:var(--page-bg); }
+  .portfolio-giant-text{
+    font-size:clamp(64px,14vw,220px); font-weight:700; letter-spacing:-0.03em; line-height:1;
+    text-transform:uppercase; color:var(--white);
+    transition:color .3s var(--ease);
+  }
+  .portfolio-giant:hover .portfolio-giant-text{ color:var(--brand-dark); }
+
+  /* Small CTA beneath the giant heading — subtle by default, sharpens up
+     slightly on hover/tap to signal the whole block is interactive. */
+  .portfolio-giant-sub{
+    display:inline-flex; align-items:center; gap:7px; margin-top:clamp(22px,3.2vw,38px);
+    font-size:13px; font-weight:400; letter-spacing:3px; text-transform:uppercase;
+    color:rgba(255,255,255,.55);
+    transition:color .3s var(--ease), letter-spacing .3s var(--ease);
+  }
+  .portfolio-giant:hover .portfolio-giant-sub{ color:rgba(17,17,17,.6); letter-spacing:3.6px; }
+  .portfolio-giant-sub .arrow-down{ display:inline-block; transition:transform .3s var(--ease); }
+  .portfolio-giant:hover .portfolio-giant-sub .arrow-down{ transform:translateY(3px); }
+
+  @media (max-width:900px){
+    .portfolio-giant{ min-height:38vh; padding:48px 20px; }
+    .portfolio-giant-sub{ font-size:11px; letter-spacing:2.4px; }
+  }
+
+  .hero-scroll-cue{
+    position:absolute; bottom:44px; left:40px; display:flex; align-items:center; gap:12px; font-size:12px; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--grey); z-index:2;
+  }
+  .hero-scroll-cue .line{width:1px; height:40px; background:var(--grey-line); position:relative; overflow:hidden;}
+  .hero-scroll-cue .line::after{
+    content:""; position:absolute; top:-40px; left:0; width:100%; height:40px; background:var(--purple);
+    animation:scrollcue 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollcue{50%{top:100%;} 51%{top:-40px;} 100%{top:100%;}}
+
+  @media (max-width:1000px){
+    .hero-overview{ grid-template-columns:1fr; gap:12px; max-width:420px; }
+    .hero-overview-label{ padding-top:0; }
+    .hero-overview-text{ font-size:16px; line-height:1.6; }
+    .hero-ctas-v2{ gap:28px; }
+    .hero-scroll-cue{display:none;}
+  }
+
+  /* ---------- Section basics ---------- */
+  section{padding:160px 0; position:relative;}
+  @media (max-width:900px){ section{padding:96px 0;} }
+
+  .section-tag{
+    font-size:14px; font-weight:400; letter-spacing:2.5px; text-transform:uppercase; color:var(--purple); margin-bottom:22px;
+    display:flex; align-items:center; gap:8px;
+  }
+  h2.section-title{
+    font-size:clamp(40px,5.4vw,68px); font-weight:400; letter-spacing:-0.025em; line-height:1.03; color:var(--heading);
+  }
+
+  .reveal{opacity:0; transform:translateY(46px); transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+  .reveal-stagger > *{opacity:0; transform:translateY(36px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+  .reveal-stagger.in-view > *{opacity:1; transform:translateY(0);}
+  .reveal-stagger.in-view > *:nth-child(1){transition-delay:.05s;}
+  .reveal-stagger.in-view > *:nth-child(2){transition-delay:.15s;}
+  .reveal-stagger.in-view > *:nth-child(3){transition-delay:.25s;}
+  .reveal-stagger.in-view > *:nth-child(4){transition-delay:.35s;}
+  .reveal-stagger.in-view > *:nth-child(5){transition-delay:.45s;}
+  .reveal-stagger.in-view > *:nth-child(6){transition-delay:.55s;}
+
+  /* ---------- About ---------- */
+  .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:100px; align-items:start;}
+  .about-body p{font-size:23px; line-height:1.65; color:#000000; max-width:640px; font-weight:500;}
+
+  .why-list{display:flex; flex-direction:column;}
+  .why-item{
+    padding:30px 0; border-top:1px solid #000000; display:flex; align-items:center; justify-content:space-between;
+    transition:padding-left .4s var(--ease);
+  }
+  .why-item:last-child{border-bottom:1px solid #000000;}
+  .why-item:hover{padding-left:14px;}
+  .why-item span.label{font-size:23px; font-weight:400;}
+  .why-item span.idx{font-size:14px; color:var(--grey); font-weight:400;}
+
+  @media (max-width:900px){ .about-grid{grid-template-columns:1fr; gap:60px;} }
+
+  /* ---------- Services ---------- */
+  .services-head{display:flex; justify-content:space-between; align-items:flex-end; gap:40px; margin-bottom:70px;}
+  .services-head p{font-size:19px; color:var(--grey); max-width:460px; line-height:1.6;}
+
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .service-card{
+    background:var(--page-bg); border:1px solid var(--brand-dark); border-radius:22px; padding:38px 32px;
+    display:flex; flex-direction:column; height:100%; transition:all .45s var(--ease); cursor:pointer;
+  }
+  .service-card:hover{
+    background:var(--brand-dark); border-color:var(--brand-dark); transform:translateY(-6px);
+    box-shadow:0 30px 60px rgba(17,17,17,.16);
+  }
+  .service-card .sc-top{display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:34px;}
+  .service-card .s-icon{
+    width:52px; height:52px; border-radius:16px; background:var(--purple); display:flex; align-items:center; justify-content:center;
+    animation:floaty 6s ease-in-out infinite; flex-shrink:0;
+  }
+  .service-card .s-icon svg{width:24px; height:24px; stroke:var(--white);}
+  .service-card:hover .s-icon{background:#E5DAD1;}
+  .service-card:hover .s-icon svg{stroke:var(--purple);}
+  .service-card .s-arrow{
+    width:40px; height:40px; border-radius:50%; background:var(--purple); border:1px solid var(--purple); transform:rotate(45deg); display:flex; align-items:center; justify-content:center;
+    transition:all .4s var(--ease); flex-shrink:0;
+  }
+  .service-card:hover .s-arrow{background:transparent; border-color:var(--grey-line); transform:rotate(0deg);}
+  .service-card .s-arrow svg{width:16px; height:16px; stroke:var(--white); transition:stroke .3s ease;}
+  .service-card:hover .s-arrow svg{stroke:var(--white);}
+  .service-card h3{font-size:26px; font-weight:400; letter-spacing:-0.01em; margin-bottom:22px; transition:color .3s ease; color:var(--heading);}
+  .service-card:hover h3{color:var(--white);}
+  .service-card .s-tags{display:flex; flex-wrap:wrap; gap:8px 10px; margin-top:auto;}
+  .service-card .s-tags span{
+    font-size:12.5px; color:var(--grey); padding:6px 13px; border:1px solid var(--grey-line); border-radius:100px;
+    transition:all .35s var(--ease);
+  }
+  .service-card:hover .s-tags span{color:#cfcfd4; border-color:#333;}
+
+  @media (max-width:1100px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:640px){
+    .services-grid{grid-template-columns:1fr;}
+    .services-head{flex-direction:column; align-items:flex-start;}
+  }
+
+  /* ---------- Portfolio full-screen overlay ---------- */
+  #portfolioOverlay{
+    position:fixed; inset:0; z-index:1500; background:var(--page-bg);
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transform:translateY(24px);
+    transition:opacity .45s var(--ease), transform .45s var(--ease), visibility 0s linear .45s;
+  }
+  #portfolioOverlay.open{
+    opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+    transition:opacity .45s var(--ease), transform .45s var(--ease), visibility 0s linear 0s;
+  }
+  body.portfolio-lock{overflow:hidden;}
+  .portfolio-overlay-bar{
+    position:sticky; top:0; z-index:5; background:var(--page-bg);
+    border-bottom:1px solid var(--grey-line);
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:22px clamp(20px,5vw,60px);
+  }
+  .portfolio-overlay-bar .logo-group{position:relative; width:170px; height:40px; flex-shrink:0; isolation:isolate;}
+  .portfolio-overlay-bar .logo-group img{
+    position:absolute; top:50%; left:0; transform:translateY(-50%); height:34px; width:auto;
+    /* Lettermark auto-adapts to whatever sits behind it, same technique as the
+       main site header: invert the mark's colour, then let mix-blend-mode
+       difference it against the backdrop — dark mark on light backgrounds,
+       light/brand-coloured mark on dark backgrounds. */
+    filter:invert(1); mix-blend-mode:difference;
+  }
+  .portfolio-overlay-close{
+    display:inline-flex; align-items:center; gap:10px; background:none; border:1px solid var(--brand-dark);
+    border-radius:100px; padding:12px 22px; cursor:pointer; color:var(--black);
+    font-size:14px; font-weight:400; letter-spacing:.6px; text-transform:uppercase;
+    transition:all .3s var(--ease); font-family:inherit;
+  }
+  .portfolio-overlay-close svg{width:15px; height:15px; stroke:var(--black); transition:stroke .3s ease;}
+  .portfolio-overlay-close:hover{background:var(--brand-dark); color:var(--white);}
+  .portfolio-overlay-close:hover svg{stroke:var(--white);}
+  #portfolioOverlay section#portfolio{padding-top:56px;}
+  @media (max-width:700px){
+    .portfolio-overlay-bar{padding:16px 20px;}
+    .portfolio-overlay-bar .logo-group{width:130px; height:34px;}
+    .portfolio-overlay-bar .logo-group img{height:26px;}
+    .portfolio-overlay-close span{display:none;}
+    .portfolio-overlay-close{padding:11px 13px;}
+    #portfolioOverlay section#portfolio{padding-top:36px;}
+  }
+
+  /* ---------- Portfolio grid ---------- */
+  .portfolio-tabs{
+    display:flex; flex-wrap:wrap; gap:16px; align-items:center;
+    margin:34px 0 54px;
+  }
+  .portfolio-tabs button{
+    font-family:inherit; font-size:19px; font-weight:400; letter-spacing:.3px; position:relative;
+    padding:16px 28px; border-radius:9px; background:var(--white); color:var(--black);
+    border:1px solid var(--brand-dark); cursor:pointer; height:56px; box-sizing:border-box;
+    transition:background .25s ease, color .25s ease, border-color .25s ease; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:10px;
+  }
+  .portfolio-tabs button.active{
+    background:var(--brand-dark); color:var(--white); border-color:var(--brand-dark);
+  }
+  .portfolio-tabs button:hover:not(.active){
+    background:var(--brand-dark); color:var(--white); border-color:var(--brand-dark);
+  }
+  .portfolio-tabs .pill-chevron{
+    display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px;
+    border-radius:50%; border:1px solid var(--brand-dark); flex-shrink:0;
+    transition:border-color .25s ease;
+  }
+  .portfolio-tabs .pill-chevron svg{width:10px; height:10px; stroke:var(--black); transition:stroke .25s ease, transform .35s var(--ease);}
+  .portfolio-tabs button.active .pill-chevron{border-color:var(--white);}
+  .portfolio-tabs button.active .pill-chevron svg{stroke:var(--white);}
+  .portfolio-tabs button:hover:not(.active) .pill-chevron{border-color:var(--white);}
+  .portfolio-tabs button:hover:not(.active) .pill-chevron svg{stroke:var(--white);}
+  .portfolio-tabs button.active .pill-chevron svg{transform:rotate(180deg);}
+  @media (max-width:700px){
+    .portfolio-tabs{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  }
+  .portfolio-group-tag{
+    font-size:13px; font-weight:400; letter-spacing:2.5px; text-transform:uppercase; color:var(--black);
+    padding-bottom:14px; border-bottom:1px solid var(--grey-line);
+  }
+  .portfolio-category{
+    font-size:12px; font-weight:400; letter-spacing:2px; text-transform:uppercase; color:var(--purple); margin-bottom:26px;
+  }
+  .portfolio-toggle{
+    cursor:pointer; user-select:none; display:flex; align-items:center; gap:10px;
+  }
+  .portfolio-toggle .toggle-chevron{
+    display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px;
+    border-radius:50%; border:1px solid var(--grey-line); flex-shrink:0; transition:all .35s var(--ease);
+  }
+  .portfolio-toggle .toggle-chevron svg{width:10px; height:10px; stroke:var(--black); transition:transform .35s var(--ease);}
+  .portfolio-toggle.open .toggle-chevron{background:var(--brand-dark); border-color:var(--brand-dark);}
+  .portfolio-toggle.open .toggle-chevron svg{stroke:var(--white); transform:rotate(180deg);}
+
+  .portfolio-subtabs{
+    display:flex; flex-wrap:wrap; gap:20px; margin:6px 0 34px;
+  }
+  .portfolio-subtabs button{
+    font-family:inherit; cursor:pointer; user-select:none; display:flex; align-items:center; gap:9px;
+    background:none; border:none; padding:0;
+    font-size:18px; font-weight:400; letter-spacing:.3px; color:var(--black);
+  }
+  .subtoggle-chevron{
+    display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
+    border-radius:50%; border:1px solid var(--brand-dark); background:transparent; flex-shrink:0; transition:transform .35s var(--ease);
+  }
+  .subtoggle-chevron svg{width:11px; height:11px; stroke:var(--black); transition:transform .35s var(--ease);}
+  .portfolio-subtabs button.open .subtoggle-chevron svg{transform:rotate(180deg);}
+  .portfolio-subanchor{
+    height:0; margin:0; padding:0; scroll-margin-top:110px;
+  }
+  .portfolio-anchor{
+    height:0; margin:0; padding:0; scroll-margin-top:110px;
+  }
+  .portfolio-collapse{
+    overflow:hidden; max-height:0; transition:max-height .5s var(--ease);
+  }
+  .portfolio-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:20px; align-items:start;
+    background:var(--grey-line); border:1px solid var(--grey-line);
+  }
+  .portfolio-grid.portfolio-grid-all{
+    grid-template-columns:repeat(3,1fr);
+  }
+  @media (max-width:1000px){
+    .portfolio-grid.portfolio-grid-all{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .portfolio-grid.portfolio-grid-all{grid-template-columns:1fr;}
+  }
+  .portfolio-card{
+    position:relative; z-index:5; overflow:hidden; background:var(--white);
+  }
+  .portfolio-card img{
+    width:100%; height:auto; display:block; transition:transform .7s var(--ease);
+  }
+  .portfolio-card:hover img{transform:scale(1.06);}
+  .portfolio-card .pc-overlay{
+    position:absolute; inset:0; background:linear-gradient(180deg,transparent 45%,rgba(39,3,6,.82) 100%);
+    display:flex; flex-direction:column; justify-content:flex-end; padding:28px; opacity:0; transition:opacity .4s var(--ease);
+  }
+  .portfolio-card:hover .pc-overlay{opacity:1;}
+  .portfolio-card .pc-tag{
+    font-size:11px; letter-spacing:1.5px; text-transform:uppercase; color:var(--white); font-weight:400; margin-bottom:8px; opacity:.75;
+  }
+  .portfolio-card .pc-title{font-size:21px; font-weight:400; color:var(--white); letter-spacing:-0.01em;}
+  .portfolio-more{
+    margin-top:44px; text-align:center; font-size:14px; color:var(--grey);
+  }
+  .portfolio-card{cursor:zoom-in;}
+
+  .portfolio-video-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px; margin-top:20px; align-items:start;
+    background:var(--grey-line); border:1px solid var(--grey-line);
+  }
+  .portfolio-video-card{
+    position:relative; z-index:5; overflow:hidden; background:var(--brand-dark);
+  }
+  .portfolio-video-card video{
+    width:100%; height:auto; display:block; background:var(--brand-dark);
+  }
+  .portfolio-video-card .video-tag{
+    position:absolute; top:16px; left:16px; font-size:10px; letter-spacing:1.3px; text-transform:uppercase;
+    color:var(--white); font-weight:400; opacity:.9; background:rgba(39,3,6,.35); padding:5px 10px; border-radius:100px;
+    pointer-events:none; margin-bottom:0;
+  }
+  @media (max-width:900px){
+    .portfolio-video-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .portfolio-video-grid{grid-template-columns:1fr;}
+  }
+
+
+  /* ---------- Lightbox ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:2000; display:flex; align-items:center; justify-content:center;
+    background:rgba(39,3,6,.92); opacity:0; pointer-events:none; transition:opacity .35s var(--ease);
+    padding:40px;
+  }
+  .lightbox.open{opacity:1; pointer-events:auto;}
+  .lightbox-img{
+    max-width:min(92vw,1100px); max-height:88vh; width:auto; height:auto; border-radius:12px;
+    box-shadow:0 40px 80px rgba(0,0,0,.5); transform:scale(.96); transition:transform .35s var(--ease);
+    object-fit:contain;
+  }
+  .lightbox.open .lightbox-img{transform:scale(1);}
+  .lightbox-close{
+    position:absolute; top:28px; right:32px; width:46px; height:46px; border-radius:50%;
+    background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.25); color:var(--white);
+    font-size:26px; line-height:1; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:all .3s var(--ease);
+  }
+  .lightbox-close:hover{background:var(--white); color:var(--black); transform:rotate(90deg);}
+  @media (max-width:700px){
+    .lightbox{padding:16px;}
+    .lightbox-close{top:14px; right:14px; width:40px; height:40px; font-size:22px;}
+  }
+  @media (max-width:800px){
+    .portfolio-grid{grid-template-columns:1fr;}
+  }
+
+  .portfolio-placeholder{
+    border:1px dashed var(--grey-line); border-radius:28px; padding:110px 40px; text-align:center; position:relative; overflow:hidden;
+  }
+  .portfolio-placeholder .p-icon{
+    width:76px; height:76px; margin:0 auto 30px; border-radius:50%; background:var(--purple-soft); display:flex; align-items:center; justify-content:center;
+    animation:floaty 5s ease-in-out infinite;
+  }
+  .portfolio-placeholder .p-icon svg{width:30px; height:30px; stroke:var(--purple);}
+  .portfolio-placeholder h3{font-size:30px; font-weight:400; margin-bottom:14px;}
+  .portfolio-placeholder p{color:var(--grey); font-size:16px; max-width:420px; margin:0 auto;}
+  .ghost-grid{
+    position:absolute; inset:0; display:grid; grid-template-columns:repeat(6,1fr); opacity:.5; pointer-events:none;
+  }
+  .ghost-grid div{border-left:1px solid var(--grey-line);}
+
+  /* ---------- Why choose us (features) ---------- */
+  .feature-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--brand-dark); border:1px solid var(--brand-dark); margin-top:60px;}
+  .feature-card{background:var(--page-bg); padding:48px 38px; transition:background .4s var(--ease), color .4s var(--ease);}
+  .feature-card:hover{background:var(--brand-dark);}
+  .feature-card .f-num{font-size:13px; color:var(--purple); font-weight:400; letter-spacing:1.5px; margin-bottom:26px; transition:color .4s var(--ease);}
+  .feature-card:hover .f-num{color:var(--white);}
+  .feature-card h4{font-size:21px; font-weight:400; margin-bottom:12px; letter-spacing:-0.01em; transition:color .4s var(--ease); color:var(--heading);}
+  .feature-card:hover h4{color:var(--white);}
+  .feature-card p{font-size:15px; color:var(--grey); line-height:1.6; transition:color .4s var(--ease);}
+  .feature-card:hover p{color:#c4c4c9;}
+  @media (max-width:900px){ .feature-grid{grid-template-columns:1fr;} }
+
+  /* ---------- Process ---------- */
+  .process-track{position:relative; margin-top:80px;}
+  .process-line{
+    position:absolute; top:26px; left:0; right:0; height:1px; background:var(--grey-line); z-index:0;
+  }
+  .process-line-fill{
+    position:absolute; top:0; left:0; height:1px; background:var(--purple); width:0%; transition:width 1.4s var(--ease);
+  }
+  .process-steps{display:grid; grid-template-columns:repeat(5,1fr); gap:20px; position:relative; z-index:1;}
+  .process-step .p-dot{
+    width:52px; height:52px; border-radius:50%; background:var(--white); border:1px solid var(--grey-line); display:flex; align-items:center;
+    justify-content:center; font-size:14px; font-weight:400; margin-bottom:26px; transition:all .5s var(--ease);
+  }
+  .process-step.in-view .p-dot{background:var(--brand-dark); color:var(--white); border-color:var(--brand-dark);}
+  .process-step h4{font-size:19px; font-weight:400; margin-bottom:10px; color:var(--heading);}
+  .process-step p{font-size:14px; color:var(--grey); line-height:1.55;}
+  @media (max-width:900px){
+    .process-steps{grid-template-columns:1fr; gap:44px;}
+    .process-line{display:none;}
+  }
+
+  /* ---------- Trusted brands + testimonials (logo marquee) ---------- */
+  .trusted-title{text-align:center; margin-bottom:60px;}
+
+  .logo-marquee-wrap{
+    overflow:hidden; position:relative; z-index:3; margin:-30px 0 -40px; padding:40px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  }
+  .logo-marquee-track{
+    display:flex; gap:28px; width:max-content;
+    cursor:grab; touch-action:pan-y; user-select:none;
+  }
+  .logo-marquee-track.dragging{cursor:grabbing;}
+  .logo-marquee-track img{-webkit-user-drag:none; user-drag:none; pointer-events:none;}
+
+  .testi-card{
+    flex-shrink:0; width:380px; background:var(--page-bg); border:1px solid var(--brand-dark); border-radius:22px;
+    padding:34px 32px 30px; position:relative; z-index:3;
+    display:flex; flex-direction:column;
+    /* Trusted By patches are fixed to var(--page-bg) (#E5DAD1) at all times —
+       no color change on hover/tap. Only a subtle lift + soft shadow on hover. */
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .testi-card:hover{ transform:translateY(-6px); box-shadow:0 20px 40px rgba(17,17,17,.10); }
+  .testi-card .logo-wrap{height:40px; display:flex; align-items:center; margin-bottom:26px;}
+  .testi-card .logo-wrap img{
+    max-height:40px; max-width:150px; width:auto; height:auto; object-fit:contain;
+    filter:grayscale(100%); opacity:.85;
+    transition:filter .4s var(--ease), opacity .4s var(--ease);
+  }
+  .testi-card:hover .logo-wrap img{ filter:grayscale(0%); opacity:1; }
+  .testi-card .quote-mark{font-size:34px; color:#000000; font-weight:400; line-height:0; display:block; margin-bottom:8px;}
+  .testi-card .quote-text{
+    font-size:14.5px; line-height:1.68; color:var(--grey);
+    /* No line-clamp / overflow-hidden here on purpose — every review must
+       display in full, however long it is. Cards sit in a flex row with
+       default align-items:stretch, so they still line up to equal height
+       automatically (matching the tallest card in the set). */
+    min-height:calc(14.5px * 1.68 * 4);
+  }
+  /* Name + role always sit together at the very bottom of the card, no
+     matter how long or short the review text above them is — the card is
+     a flex column and this wrapper's margin-top:auto eats any leftover
+     space, so every card's name/role start at the same baseline. */
+  .testi-card .testi-meta{margin-top:auto; padding-top:24px;}
+  .testi-card .testi-name{font-size:14px; font-weight:400; color:var(--black);}
+  .testi-card .testi-role{font-size:12.5px; color:var(--grey); margin-top:2px;}
+
+  /* ---------- Contact ---------- */
+  section#contact{background:var(--brand-dark); padding:0;}
+  .contact-section{
+    background:var(--brand-dark); color:var(--white); border-radius:0; margin:0; max-width:none; width:100%;
+    padding:110px 80px; position:relative; z-index:3;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+  }
+  .contact-logo{
+    display:block; margin:0 auto 56px; height:clamp(90px,12vw,150px); width:auto;
+    filter:brightness(0) invert(1); opacity:.95;
+  }
+  .contact-left{display:flex; flex-direction:column; align-items:center; max-width:720px; width:100%;}
+  .contact-left h2{
+    font-size:clamp(30px,3.4vw,52px); font-weight:400; letter-spacing:-0.025em; line-height:1.08;
+    max-width:none; width:max-content; margin:0 auto;
+  }
+  .contact-left p{margin:22px auto 0; color:#B9B9BE; font-size:17px; line-height:1.7; max-width:440px;}
+  .social-row{display:flex; justify-content:center; gap:14px; margin:40px auto 0;}
+  .social-row a{
+    width:42px; height:42px; border-radius:50%; border:1px solid #333; display:flex; align-items:center; justify-content:center;
+    transition:all .35s var(--ease);
+  }
+  .social-row a:hover{background:var(--purple); border-color:var(--purple);}
+  .social-row a svg{width:19px; height:19px; stroke:#D8D8DC;}
+  .social-row a:hover svg{stroke:var(--white);}
+  /* LinkedIn / Behance use real filled brand marks rather than the generic
+     outline style the other social icons use, so they get their own
+     fill-based color + hover treatment (same colors/timing as the rest). */
+  .social-row a.icon-solid svg{fill:#D8D8DC; stroke:none;}
+  .social-row a.icon-solid:hover svg{fill:var(--white);}
+
+  .submit-btn{
+    background:var(--white); color:var(--black); padding:22px 34px; border-radius:100px; font-size:17px; font-weight:500;
+    border:1px solid var(--white); box-shadow:none; outline:none;
+    display:inline-flex; align-items:center; gap:12px;
+    white-space:nowrap; flex:0 1 auto; min-width:0;
+    transition:background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease, gap .25s ease, transform .25s ease;
+  }
+  .submit-btn svg{stroke:var(--black); transition:stroke .25s ease; flex-shrink:0;}
+  .submit-btn:hover{background:var(--brand-dark); color:var(--white); border-color:var(--white); box-shadow:none; gap:18px; transform:translateY(-2px);}
+  .submit-btn:hover svg{stroke:var(--white);}
+  .cta-row{display:flex; flex-wrap:nowrap; justify-content:center; align-items:center; gap:22px; margin-top:40px; width:100%;}
+  .contact-location{margin:56px auto 0; display:flex; align-items:center; justify-content:center; gap:10px; font-size:14px; color:#9a9a9e; letter-spacing:.3px;}
+  .contact-location svg{stroke:#9a9a9e; flex-shrink:0;}
+
+  @media (min-width:901px){
+    .contact-left h2{ white-space:nowrap; }
+  }
+
+  @media (max-width:900px){
+    .contact-section{padding:70px 30px; border-radius:0;}
+    .contact-logo{ margin-bottom:40px; height:clamp(76px,15vw,120px); }
+    .contact-left h2{ white-space:normal; width:100%; max-width:100%; }
+    .cta-row{ gap:8px; }
+    .submit-btn{ flex:1 1 0; justify-content:center; padding:15px 10px; font-size:12.5px; gap:6px; }
+    .submit-btn svg{ width:14px; height:14px; }
+    .submit-btn:hover{ gap:8px; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--brand-dark); color:var(--white); padding:70px 0 40px;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:40px; padding-bottom:50px;}
+  .footer-brand{text-align:left; align-self:flex-end;}
+  .footer-brand p{margin-top:16px; color:#B9B9BE; font-size:14px; max-width:280px; line-height:1.6; text-align:left;}
+  .footer-cols{display:flex; gap:80px;}
+  .footer-col h5{font-size:14px; letter-spacing:1.5px; text-transform:uppercase; color:#B9B9BE; margin-bottom:20px;}
+  .footer-col a{
+    position:relative; display:block; width:max-content; font-size:15px; color:var(--white);
+    padding:4px 12px; margin:-4px -12px 8px -12px; border-radius:100px;
+    transition:background .3s var(--ease), color .3s var(--ease);
+  }
+  .footer-col a:last-child{margin-bottom:12px;}
+  .footer-col a:hover{background:var(--white); color:var(--black);}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.15); padding-top:26px; display:flex; justify-content:space-between; font-size:13px; color:#B9B9BE;
+    flex-wrap:wrap; gap:12px;
+  }
+  @media (max-width:700px){ .footer-cols{gap:40px; flex-wrap:wrap;} }
+
+  /* Footer brand logo: ~20x the header nav logo size, position/proportions unchanged.
+     (The shared .logo-full/.logo-mono classes default to opacity:0 — that's why the
+     earlier size-only change never became visible. Here we also make it visible, and
+     give the anchor box matching height so the enlarged logo doesn't overlap the
+     paragraph below it.) */
+  .footer-brand .logo-group{ height:920px !important; width:230px; margin:0 !important; float:none !important; position:relative !important; left:0 !important; }
+  .footer-brand .logo-full{ height:920px !important; opacity:1 !important; }
+  .footer-brand .logo-mono{ opacity:0 !important; }
+  /* Force the big footer wordmark into the bottom-left corner, left aligned —
+     overrides the header logo's vertically-centered positioning. */
+  .footer-brand .logo-group img{
+    position:absolute !important;
+    top:auto !important;
+    bottom:0 !important;
+    left:0 !important;
+    right:auto !important;
+    transform:none !important;
+    margin:0 !important;
+  }
+
+  /* =====================================================================
+     MOBILE-ONLY OPTIMIZATION (320px–767px)
+     Everything below is scoped to max-width:767px and is appended last on
+     purpose so it wins the cascade at mobile widths only. Nothing above
+     767px is touched — tablet/desktop rules above are untouched and still
+     apply unchanged from 768px up.
+     ===================================================================== */
+  @media (max-width:767px){
+
+    /* ---------- Global / layout ---------- */
+    .container{ padding:0 clamp(16px,5vw,24px); }
+    section{ padding:clamp(56px,14vw,80px) 0; }
+    html, body{ max-width:100%; overflow-x:hidden; }
+    *{ cursor:auto !important; }
+
+    /* ---------- Nav ---------- */
+    header.nav{ padding:18px 0; }
+    header.nav.scrolled{ padding:12px 0; }
+    .nav-inner{ gap:12px; }
+    .logo-group{ width:clamp(120px,38vw,180px); height:38px; }
+    .logo-full{ height:clamp(24px,7vw,32px); }
+    .logo-mono{ height:clamp(34px,10vw,44px); }
+    .nav-toggle{ width:28px; }
+    .mobile-menu{ padding:100px clamp(24px,7vw,40px) 40px; gap:22px; width:min(360px,88vw); }
+    .mobile-menu a{ font-size:clamp(24px,7vw,28px); }
+
+    /* ---------- Hero ---------- */
+    .hero{ min-height:auto; padding-top:118px !important; padding-bottom:64px; }
+    .hero-inner-v2{ gap:24px; }
+    .hero-sub-v2{ font-size:16px; line-height:1.55; margin-bottom:20px; }
+    .headline-stagger{ font-size:clamp(34px,11.5vw,58px); line-height:1.02; }
+    .headline-stagger .line2{ margin-left:2%; }
+    .headline-stagger .line3{ margin-left:4%; }
+    .hero-ctas-v2{ flex-wrap:wrap; gap:12px; margin-left:0; margin-top:28px; }
+    .btn-outline{ padding:14px 24px; font-size:15px; flex:1 1 auto; justify-content:center; }
+    .hero-scroll-cue{ display:none; }
+
+    /* ---------- Section headings ---------- */
+    .section-tag{ font-size:12px; letter-spacing:2px; margin-bottom:16px; }
+    h2.section-title{ font-size:clamp(28px,8.5vw,36px); }
+
+    /* ---------- About ---------- */
+    .about-grid{ gap:36px; }
+    .about-body p{ font-size:16px; line-height:1.6; max-width:100%; }
+    .why-list{ margin-top:32px !important; }
+    .why-item{ padding:20px 0; }
+    .why-item span.label{ font-size:17px; }
+    .why-item span.idx{ font-size:12px; }
+
+    /* ---------- Services ---------- */
+    .services-head{ margin-bottom:36px; gap:16px; }
+    .services-head p{ font-size:15px; max-width:100%; }
+    .services-grid{ gap:16px; }
+    .service-card{ padding:26px 22px; border-radius:16px; }
+    .service-card .sc-top{ margin-bottom:24px; }
+    .service-card .s-icon{ width:44px; height:44px; border-radius:12px; }
+    .service-card .s-icon svg{ width:20px; height:20px; }
+    .service-card .s-arrow{ width:34px; height:34px; }
+    .service-card .s-arrow svg{ width:14px; height:14px; }
+    .service-card h3{ font-size:20px; margin-bottom:16px; }
+    .service-card .s-tags span{ font-size:11.5px; padding:5px 11px; }
+
+    /* ---------- Portfolio ---------- */
+    .portfolio-tabs{ gap:10px; margin:22px 0 30px; }
+    .portfolio-tabs button{ font-size:14px; padding:11px 18px; height:44px; gap:7px; }
+    .portfolio-group-tag{ font-size:11px; padding-bottom:10px; }
+    .portfolio-category{ font-size:11px; margin-bottom:18px; }
+    .portfolio-subtabs{ gap:14px; margin:6px 0 24px; }
+    .portfolio-subtabs button{ font-size:15px; gap:7px; }
+    .subtoggle-chevron{ width:19px; height:19px; }
+    .portfolio-grid{ grid-template-columns:1fr !important; }
+    .portfolio-grid.portfolio-grid-all{ grid-template-columns:1fr !important; }
+    .portfolio-video-grid{ grid-template-columns:1fr !important; }
+    .portfolio-card .pc-overlay{ padding:18px; opacity:1; background:linear-gradient(180deg,transparent 55%,rgba(39,3,6,.82) 100%); }
+    .portfolio-card .pc-title{ font-size:17px; }
+    .portfolio-placeholder{ padding:60px 24px; border-radius:20px; }
+    .portfolio-placeholder h3{ font-size:22px; }
+    .portfolio-placeholder p{ font-size:14px; }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox{ padding:14px; }
+    .lightbox-close{ top:12px; right:12px; width:38px; height:38px; font-size:20px; }
+
+    /* ---------- Why choose us (features) ---------- */
+    .feature-grid{ margin-top:36px; }
+    .feature-card{ padding:30px 24px; }
+    .feature-card .f-num{ margin-bottom:16px; }
+    .feature-card h4{ font-size:18px; margin-bottom:10px; }
+    .feature-card p{ font-size:14px; }
+
+    /* ---------- Process ---------- */
+    .process-track{ margin-top:48px; }
+    .process-steps{ gap:32px; }
+    .process-step .p-dot{ width:44px; height:44px; margin-bottom:18px; }
+    .process-step h4{ font-size:17px; }
+    .process-step p{ font-size:13.5px; }
+
+    /* ---------- Trusted / testimonials ---------- */
+    .trusted-title{ margin-bottom:36px; }
+    .testi-card{ width:82vw; max-width:340px; padding:26px 22px 24px; border-radius:16px; }
+    .testi-card .quote-text{ font-size:13.5px; }
+
+    /* ---------- Contact ---------- */
+    .contact-section{ padding:48px 20px; border-radius:0; margin:0; }
+    .contact-logo{ margin-bottom:28px; height:clamp(60px,18vw,90px); }
+    .contact-left p{ font-size:15px; max-width:100%; }
+    .social-row{ margin-top:28px; }
+    .contact-location{ margin-top:36px; font-size:13px; }
+    .cta-row{ gap:8px; flex-wrap:nowrap; }
+    .submit-btn{ flex:1 1 0; width:auto; justify-content:center; padding:13px 8px; font-size:11.5px; gap:5px; }
+    .submit-btn svg{ width:13px; height:13px; }
+    .submit-btn:hover{ gap:7px; }
+
+    /* ---------- Footer ---------- */
+    footer{ padding:48px 0 28px; }
+    .footer-top{ gap:32px; padding-bottom:32px; }
+    .footer-brand p{ max-width:100%; }
+    .footer-cols{ gap:40px; width:100%; }
+    .footer-bottom{ font-size:12px; }
+  }
+
+  /* Extra-tight phones (320px–380px) */
+  @media (max-width:380px){
+    .container{ padding:0 14px; }
+    .headline-stagger{ font-size:clamp(30px,10.5vw,40px); }
+    .btn-outline{ flex:1 1 100%; }
+    .testi-card{ width:86vw; }
+    .contact-section{ padding:40px 16px; }
+    .cta-row{ gap:6px; }
+    .submit-btn{ padding:12px 6px; font-size:10px; gap:4px; }
+    .submit-btn svg{ width:12px; height:12px; }
+  }
+
+  /* ---------- Services marquee (ticker) ---------- */
+  .services-marquee{
+    width:100%; overflow:hidden; position:relative; z-index:3;
+    background:var(--brand-dark);
+    padding:26px 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);
+  }
+  .services-marquee-track{
+    display:flex; align-items:center; width:max-content;
+    animation:servicesMarqueeScroll 34s linear infinite;
+    will-change:transform;
+  }
+  .services-marquee-group{
+    display:flex; align-items:center; flex-shrink:0;
+  }
+  .services-marquee-item{
+    display:flex; align-items:center; gap:clamp(20px,2.6vw,36px);
+    padding:0 calc(clamp(20px,2.6vw,36px) / 2);
+  }
+  .services-marquee-word{
+    font-family:'Sequel Sans Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:clamp(18px,2.6vw,32px);
+    font-weight:400;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    color:var(--white);
+    white-space:nowrap;
+    line-height:1;
+  }
+  .services-marquee-logo{
+    height:clamp(26px,3vw,38px);
+    width:auto;
+    display:block;
+    flex-shrink:0;
+    filter:brightness(0) invert(1);
+  }
+  @keyframes servicesMarqueeScroll{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .services-marquee-track{ animation:none; }
+  }
+  @media (max-width:900px){
+    .services-marquee{ padding:20px 0; }
+  }
+  @media (max-width:560px){
+    .services-marquee{ padding:16px 0; }
+    .services-marquee-track{ animation-duration:22s; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<header class="nav" id="siteNav">
+  <div class="container nav-inner">
+    <a href="#home" class="logo-group"><img class="logo-full" src="assets/images/image_001.png" alt="Hriddhix"><img class="logo-mono" src="assets/images/image_002.png" alt="Hriddhix"></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#contact" class="nav-cta">Let's Work Together!</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home">Home</a>
+  <a href="#about">About Us</a>
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#contact">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home" style="padding-top:0;">
+
+  <div class="container hero-inner-v2">
+    <div class="hero-logo-wrap reveal" id="heroLogoWrap">
+      <img class="hero-wordmark" src="assets/images/image_003.png" alt="Hriddhix">
+    </div>
+    <div class="hero-overview reveal">
+      <div class="hero-overview-label">Overview</div>
+      <p class="hero-overview-text">Hriddhix is a creative design studio dedicated to helping businesses grow through thoughtful design, motion, and visual storytelling. Every project is crafted with creativity, purpose, and attention to detail to create lasting impact.</p>
+    </div>
+    <div class="hero-ctas-v2">
+      <a href="#portfolio" class="hero-cta">View Portfolio</a>
+      <a href="#contact" class="hero-cta hero-cta-arrow">Get Started<span class="arrow-ne" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></span></a>
+    </div>
+  </div>
+  <div class="hero-scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- SERVICES MARQUEE -->
+<section class="services-marquee" aria-label="Our services">
+  <div class="services-marquee-track">
+    <div class="services-marquee-group">
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">DESIGN</span>
+          <img class="services-marquee-logo" src="assets/images/image_004.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">BRANDING</span>
+          <img class="services-marquee-logo" src="assets/images/image_005.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">MOTION</span>
+          <img class="services-marquee-logo" src="assets/images/image_006.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">VIDEO</span>
+          <img class="services-marquee-logo" src="assets/images/image_007.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">CREATIVITY</span>
+          <img class="services-marquee-logo" src="assets/images/image_008.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">VISUALS</span>
+          <img class="services-marquee-logo" src="assets/images/image_009.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">EDITING</span>
+          <img class="services-marquee-logo" src="assets/images/image_010.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">IDENTITY</span>
+          <img class="services-marquee-logo" src="assets/images/image_011.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">STORYTELLING</span>
+          <img class="services-marquee-logo" src="assets/images/image_012.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">DIGITAL</span>
+          <img class="services-marquee-logo" src="assets/images/image_013.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">PRINT</span>
+          <img class="services-marquee-logo" src="assets/images/image_014.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">PRODUCTION</span>
+          <img class="services-marquee-logo" src="assets/images/image_015.png" alt="Hriddhix">
+        </div>
+    </div>
+    <div class="services-marquee-group" aria-hidden="true">
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">DESIGN</span>
+          <img class="services-marquee-logo" src="assets/images/image_016.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">BRANDING</span>
+          <img class="services-marquee-logo" src="assets/images/image_017.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">MOTION</span>
+          <img class="services-marquee-logo" src="assets/images/image_018.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">VIDEO</span>
+          <img class="services-marquee-logo" src="assets/images/image_019.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">CREATIVITY</span>
+          <img class="services-marquee-logo" src="assets/images/image_020.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">VISUALS</span>
+          <img class="services-marquee-logo" src="assets/images/image_021.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">EDITING</span>
+          <img class="services-marquee-logo" src="assets/images/image_022.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">IDENTITY</span>
+          <img class="services-marquee-logo" src="assets/images/image_023.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">STORYTELLING</span>
+          <img class="services-marquee-logo" src="assets/images/image_024.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">DIGITAL</span>
+          <img class="services-marquee-logo" src="assets/images/image_025.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">PRINT</span>
+          <img class="services-marquee-logo" src="assets/images/image_026.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">PRODUCTION</span>
+          <img class="services-marquee-logo" src="assets/images/image_027.png" alt="Hriddhix">
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="section-tag">About Us</div>
+        <h2 class="section-title">Crafting brands with purpose &amp; precision.</h2>
+      </div>
+      <div>
+        <div class="why-list reveal-stagger" style="margin-top:0;">
+          <div class="why-item"><span class="label">Creative Thinking</span><span class="idx">01</span></div>
+          <div class="why-item"><span class="label">Strategic Design</span><span class="idx">02</span></div>
+          <div class="why-item"><span class="label">Premium Quality</span><span class="idx">03</span></div>
+          <div class="why-item"><span class="label">Fast Communication</span><span class="idx">04</span></div>
+          <div class="why-item"><span class="label">Attention to Detail</span><span class="idx">05</span></div>
+          <div class="why-item"><span class="label">Client-Focused Approach</span><span class="idx">06</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--off);">
+  <div class="container">
+    <div class="services-head reveal">
+      <div>
+        <div class="section-tag">What We Do</div>
+        <h2 class="section-title">Services built for growing brands.</h2>
+      </div>
+      <p>From identity to motion to production, a full creative toolkit under one roof.</p>
+    </div>
+    <div class="services-grid reveal-stagger">
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6l-6.3 4.4 2.3-7.2-6-4.4h7.6z"/></svg></div>
+          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+        </div>
+        <h3>Design &amp; Branding</h3>
+        <div class="s-tags"><span>Brand Identity</span><span>Logo Design</span><span>Brand Guidelines</span><span>Visual Identity</span></div>
+      </div>
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l5-3v10l-5-3M4 6h9a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg></div>
+          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+        </div>
+        <h3>Video Editing &amp; Motion Graphics</h3>
+        <div class="s-tags"><span>Promotional Videos</span><span>Motion Graphics</span><span>Reels</span><span>Ads</span><span>Explainer Videos</span></div>
+      </div>
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M21 6H8a4 4 0 00-4 4v1M7 22l-4-4 4-4M3 18h13a4 4 0 004-4v-1"/></svg></div>
+          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+        </div>
+        <h3>Social Media Marketing</h3>
+        <div class="s-tags"><span>Content Strategy</span><span>Content Creation</span><span>Creative Posts</span><span>Reels</span><span>Campaign Design</span></div>
+      </div>
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg></div>
+          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+        </div>
+        <h3>Print Design</h3>
+        <div class="s-tags"><span>Brochures</span><span>Flyers</span><span>Business Cards</span><span>Packaging</span><span>Hoardings</span><span>Posters</span></div>
+      </div>
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7zM14 5H3a2 2 0 00-2 2v10a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2z"/></svg></div>
+          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+        </div>
+        <h3>Video Production</h3>
+        <div class="s-tags"><span>Creative Direction</span><span>Shooting</span><span>Commercial Production</span><span>Product Videos</span><span>Brand Films</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO SHOWCASE (giant centered heading, links into the full portfolio overlay below) -->
+<section id="portfolio-showcase" class="reveal" style="padding:0;">
+  <a href="#portfolio" class="portfolio-giant" aria-label="View full portfolio">
+    <span class="portfolio-giant-text">Portfolio</span>
+    <span class="portfolio-giant-sub">Tap to View<span class="arrow-down" aria-hidden="true"> ↓</span></span>
+  </a>
+</section>
+
+<!-- PORTFOLIO (opens as a full-screen overlay on top of the homepage) -->
+<div id="portfolioOverlay" aria-hidden="true">
+  <div class="portfolio-overlay-bar">
+    <a href="#home" class="logo-group" aria-label="Hriddhix">
+      <img src="assets/images/image_002.png" alt="Hriddhix">
+    </a>
+    <button type="button" class="portfolio-overlay-close" id="portfolioOverlayClose" aria-label="Close portfolio and return to homepage">
+      <span>Back to Home</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+<section id="portfolio">
+  <div class="container">
+    <div class="section-tag reveal">Our Work</div>
+    <h2 class="section-title reveal">Portfolio</h2>
+
+    <div class="portfolio-tabs reveal">
+      <button data-target="pf-all" class="active">All<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <button data-target="pf-design-branding">Design and Branding<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <button data-target="pf-video-motion">Video Editing &amp; Motion Graphics<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+      <button data-target="pf-print">Print<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+    </div>
+
+<div class="portfolio-anchor" id="pf-all"></div>
+    <div class="portfolio-collapse">
+    <div class="portfolio-grid portfolio-grid-all reveal-stagger in-view" id="portfolioAllGrid"></div>
+    </div>
+
+<div class="portfolio-anchor" id="pf-design-branding"></div>
+    <div class="portfolio-collapse">
+<div class="portfolio-subtabs reveal">
+<button data-subtarget="pfs-poster-design">Poster Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<button data-subtarget="pfs-brand-identity">Brand Identity<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+</div>
+<div class="portfolio-subanchor" id="pfs-poster-design"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-grid reveal-stagger">
+      <div class="portfolio-card">
+        <img src="assets/images/image_028.jpg" alt="Poster design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Poster Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_029.jpg" alt="Poster design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Poster Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_030.jpg" alt="Poster design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Poster Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_031.jpg" alt="Poster design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Poster Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_032.jpg" alt="Poster design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Poster Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_033.jpg" alt="Poster design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Poster Design</div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="portfolio-subanchor" id="pfs-brand-identity"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-grid reveal-stagger">
+      <div class="portfolio-card">
+        <img src="assets/images/image_034.jpg" alt="Govalkar Laboratory branded pen mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_035.jpg" alt="Govalkar Laboratory branded face mask mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_036.jpg" alt="Govalkar Laboratory branded mug mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_037.jpg" alt="Govalkar Laboratory letterhead and envelope mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_038.jpg" alt="Govalkar Laboratory letterhead and envelope mockup, alternate version">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_039.jpg" alt="Govalkar Laboratory signage board mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_040.jpg" alt="Govalkar Laboratory billboard mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_041.jpg" alt="Govalkar Laboratory lab coat uniform collage mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_042.jpg" alt="Govalkar Laboratory logo over lab photo">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_043.jpg" alt="Govalkar Laboratory blood sample courier box mockup">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brand Identity</div>
+        </div>
+      </div>
+      <div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_044.jpg">
+          <source src="assets/videos/video_001.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Brand Identity</div>
+      </div>
+    </div>
+</div>
+
+    </div>
+
+<div class="portfolio-anchor" id="pf-video-motion"></div>
+    <div class="portfolio-collapse">
+<div class="portfolio-subtabs reveal">
+<button data-subtarget="pfs-motion-poster">Motion Poster<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<button data-subtarget="pfs-motion-graphics">Motion Graphics<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<button data-subtarget="pfs-video-editing">Video Editing<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+</div>
+<div class="portfolio-subanchor" id="pfs-motion-poster"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-video-grid reveal-stagger">
+<div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_045.jpg">
+          <source src="assets/videos/video_002.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Motion Poster</div>
+      </div>
+<div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_046.jpg">
+          <source src="assets/videos/video_003.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Motion Poster</div>
+      </div>
+<div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_047.jpg">
+          <source src="assets/videos/video_004.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Motion Poster</div>
+      </div>
+    </div>
+</div>
+<div class="portfolio-subanchor" id="pfs-motion-graphics"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-video-grid reveal-stagger">
+      <div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_048.jpg">
+          <source src="assets/videos/video_005.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Motion Graphics</div>
+      </div>
+    </div>
+</div>
+<div class="portfolio-subanchor" id="pfs-video-editing"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-video-grid reveal-stagger">
+      <div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_049.jpg">
+          <source src="assets/videos/video_006.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Video Editing</div>
+      </div>
+      <div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_050.jpg">
+          <source src="assets/videos/video_007.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Video Editing</div>
+      </div>
+      <div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_051.jpg">
+          <source src="assets/videos/video_008.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Video Editing</div>
+      </div>
+      <div class="portfolio-video-card">
+        <video controls preload="metadata" playsinline poster="assets/images/image_052.jpg">
+          <source src="assets/videos/video_009.mp4" type="video/mp4">
+        </video>
+        <div class="pc-tag video-tag">Video Editing</div>
+      </div>
+    </div>
+</div>
+
+    </div>
+
+<div class="portfolio-anchor" id="pf-print"></div>
+    <div class="portfolio-collapse">
+<div class="portfolio-subtabs reveal">
+<button data-subtarget="pfs-backdrop-design">Backdrop Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<button data-subtarget="pfs-ticket-design">Ticket Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<button data-subtarget="pfs-newspaper-ads">Newspaper Ads<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+<button data-subtarget="pfs-brochure-design">Brochure Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
+</div>
+<div class="portfolio-subanchor" id="pfs-backdrop-design"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-grid reveal-stagger">
+            <div class="portfolio-card">
+        <img src="assets/images/image_053.jpg" alt="Vitthal Sawla Maza devotional stage backdrop design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Stage Backdrop</div>
+        </div>
+      </div>
+            <div class="portfolio-card">
+        <img src="assets/images/image_054.jpg" alt="Mahesh Kale Swargamandhya stage backdrop design, Alibaug">
+        <div class="pc-overlay">
+          <div class="pc-tag">Stage Backdrop</div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="portfolio-subanchor" id="pfs-ticket-design"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-grid reveal-stagger">
+      <div class="portfolio-card">
+        <img src="assets/images/image_055.jpg" alt="Geet Ramayan event ticket design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Ticket Design</div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="portfolio-subanchor" id="pfs-newspaper-ads"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-grid reveal-stagger">
+            <div class="portfolio-card">
+        <img src="assets/images/image_056.jpg" alt="Vitthal Sawla Majha newspaper advertisement, Dadar">
+        <div class="pc-overlay">
+          <div class="pc-tag">Newspaper Ad</div>
+        </div>
+      </div>
+            <div class="portfolio-card">
+        <img src="assets/images/image_057.jpg" alt="Swarotsav Marathicha newspaper advertisement, Matunga">
+        <div class="pc-overlay">
+          <div class="pc-tag">Newspaper Ad</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_058.jpg" alt="Shabdhanchya Palikadle newspaper advertisement">
+        <div class="pc-overlay">
+          <div class="pc-tag">Newspaper Ad</div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="portfolio-subanchor" id="pfs-brochure-design"></div>
+<div class="portfolio-collapse">
+<div class="portfolio-grid reveal-stagger">
+      <div class="portfolio-card">
+        <img src="assets/images/image_059.jpg" alt="Sur Rahi brochure cover design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brochure Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_060.jpg" alt="Sur Rahi brochure open spread design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brochure Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_061.jpg" alt="Alexa Enterprises brochure cover design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brochure Design</div>
+        </div>
+      </div>
+      <div class="portfolio-card">
+        <img src="assets/images/image_062.jpg" alt="Alexa Enterprises brochure open spread design">
+        <div class="pc-overlay">
+          <div class="pc-tag">Brochure Design</div>
+        </div>
+      </div>
+    </div>
+</div>
+
+    </div>
+
+
+  </div>
+</section>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section style="background:var(--off);">
+  <div class="container">
+    <div class="section-tag reveal">Why Hriddhix</div>
+    <h2 class="section-title reveal">Why brands choose to work with us.</h2>
+    <div class="feature-grid reveal-stagger">
+      <div class="feature-card"><div class="f-num">01</div><h4>Creative Excellence</h4><p>Every concept is pushed past the obvious answer until it feels distinctly yours.</p></div>
+      <div class="feature-card"><div class="f-num">02</div><h4>Premium Design Quality</h4><p>Meticulous craft in typography, spacing, and finish across every deliverable.</p></div>
+      <div class="feature-card"><div class="f-num">03</div><h4>Fast Delivery</h4><p>Efficient process without shortcuts, momentum that respects the work.</p></div>
+      <div class="feature-card"><div class="f-num">04</div><h4>Business-Oriented Solutions</h4><p>Design decisions tied to outcomes, not trends for their own sake.</p></div>
+      <div class="feature-card"><div class="f-num">05</div><h4>Attention to Detail</h4><p>Nothing ships until every pixel earns its place.</p></div>
+      <div class="feature-card"><div class="f-num">06</div><h4>Long-Term Creative Partnership</h4><p>We grow with your brand, not just a single project.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="container">
+    <div class="section-tag reveal">Our Process</div>
+    <h2 class="section-title reveal">How We Work</h2>
+    <div class="process-track">
+      <div class="process-line"><div class="process-line-fill" id="processFill"></div></div>
+      <div class="process-steps">
+        <div class="process-step"><div class="p-dot">01</div><h4>Discover</h4><p>Understanding your brand, goals, and audience from the ground up.</p></div>
+        <div class="process-step"><div class="p-dot">02</div><h4>Research</h4><p>Studying the market and competitors to find real opportunity.</p></div>
+        <div class="process-step"><div class="p-dot">03</div><h4>Design</h4><p>Translating strategy into distinctive, purposeful visuals.</p></div>
+        <div class="process-step"><div class="p-dot">04</div><h4>Refine</h4><p>Sharpening every detail through focused rounds of feedback.</p></div>
+        <div class="process-step"><div class="p-dot">05</div><h4>Deliver</h4><p>Handing off polished, production-ready brand assets.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BRANDS / TESTIMONIALS -->
+<section style="padding-top:110px; padding-bottom:110px; background:var(--off);">
+  <div class="container">
+    <div class="trusted-title reveal">
+      <div class="section-tag" style="justify-content:center;">Clients</div>
+      <h2 class="section-title">Trusted by</h2>
+    </div>
+  </div>
+  <div class="logo-marquee-wrap">
+    <div class="logo-marquee-track" id="testiTrack">
+      <!-- set 1 -->
+      <div class="testi-card">
+        <div class="logo-wrap"><img src="assets/images/image_063.png" alt="Darya Water Sports logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">From the very first discussion, Hriddhix understood exactly what our brand needed. They didn't just create attractive designs, they created visuals that reflected our identity and connected with our audience. Their communication was clear, deadlines were always met, and every revision was handled with patience.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. PRATHAMESH CHOGALE</div>
+        <div class="testi-role">Owner, Darya Water Sports</div>
+      </div>
+      </div>
+      <div class="testi-card">
+        <div class="logo-wrap"><img src="assets/images/image_064.png" alt="Govalkar Laboratory logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">We were looking for a clean, professional visual identity that truly represented our organization, and Hriddhix delivered beyond our expectations. Every design was thoughtfully crafted, with attention to detail and consistency across all materials.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MRS. PRAJAKTA GOVALKAR</div>
+        <div class="testi-role">Managing Director, Govalkar Laboratory</div>
+      </div>
+      </div>
+      <div class="testi-card">
+        <div class="logo-wrap"><img src="assets/images/image_079.png" alt="That Quiet Studio logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">What impressed us the most was Hriddhix's approach to understanding our business before starting the design process. They didn't simply execute instructions, they contributed Ideas that genuinely improved the final result. Every creative felt modern, purposeful, and aligned with our brand identity.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. SIDDHESH MAHNTONGOL</div>
+        <div class="testi-role">Founder, That Quiet Studio</div>
+      </div>
+      </div>
+      <div class="testi-card">
+        <div class="logo-wrap"><img src="assets/images/image_067.png" alt="Shree Samarth Kala Mandir logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Hriddhix helped us transform our ideas into visuals that were both creative and impactful. Their team maintained excellent communication throughout the project and delivered every asset with great attention to detail. The final outcome exceeded our expectations.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. ROHAN BULLU</div>
+        <div class="testi-role">Director, Shree Samarth Kala Mandir</div>
+      </div>
+      </div>
+      <div class="testi-card">
+        <div class="logo-wrap"><img src="assets/images/image_068.png" alt="Medwin Advanced Heart Care Clinic logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Finding a creative studio that balances design quality with professionalism isn't easy, but Hriddhix delivered exactly that. They listened carefully to our vision, offered valuable creative suggestions, and ensured every detail matched our expectations.</p>
+        <div class="testi-meta">
+        <div class="testi-name">DR. RISHI BHARGAVA</div>
+        <div class="testi-role">Managing Director, Medwin Clinic</div>
+      </div>
+      </div>
+      <div class="testi-card">
+        <div class="logo-wrap"><img src="assets/images/image_069.png" alt="M Fitness Culture logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Working with HRIDDHIX was a great experience. The team understood our vision and transformed it into clean, impactful visuals that truly represent M Fitness Culture. Their creativity, attention to detail, and professionalism made the entire process smooth. Highly recommended for anyone looking for quality design and creative work.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. SHUBHAM BHOLE</div>
+        <div class="testi-role">Director, M Fitness Culture</div>
+      </div>
+      </div>
+      <!-- set 2 (duplicate for seamless loop) -->
+      <div class="testi-card" aria-hidden="true">
+        <div class="logo-wrap"><img src="assets/images/image_070.png" alt=""></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">From the very first discussion, Hriddhix understood exactly what our brand needed. They didn't just create attractive designs, they created visuals that reflected our identity and connected with our audience. Their communication was clear, deadlines were always met, and every revision was handled with patience.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. PRATHAMESH CHOGALE</div>
+        <div class="testi-role">Owner, Darya Water Sports</div>
+      </div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="logo-wrap"><img src="assets/images/image_071.png" alt=""></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">We were looking for a clean, professional visual identity that truly represented our organization, and Hriddhix delivered beyond our expectations. Every design was thoughtfully crafted, with attention to detail and consistency across all materials.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MRS. PRAJAKTA GOVALKAR</div>
+        <div class="testi-role">Managing Director, Govalkar Laboratory</div>
+      </div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="logo-wrap"><img src="assets/images/image_080.png" alt=""></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">What impressed us the most was Hriddhix's approach to understanding our business before starting the design process. They didn't simply execute instructions, they contributed Ideas that genuinely improved the final result. Every creative felt modern, purposeful, and aligned with our brand identity.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. SIDDHESH MAHNTONGOL</div>
+        <div class="testi-role">Founder, That Quiet Studio</div>
+      </div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="logo-wrap"><img src="assets/images/image_074.png" alt=""></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Hriddhix helped us transform our ideas into visuals that were both creative and impactful. Their team maintained excellent communication throughout the project and delivered every asset with great attention to detail. The final outcome exceeded our expectations.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. ROHAN BULLU</div>
+        <div class="testi-role">Director, Shree Samarth Kala Mandir</div>
+      </div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="logo-wrap"><img src="assets/images/image_075.png" alt=""></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Finding a creative studio that balances design quality with professionalism isn't easy, but Hriddhix delivered exactly that. They listened carefully to our vision, offered valuable creative suggestions, and ensured every detail matched our expectations.</p>
+        <div class="testi-meta">
+        <div class="testi-name">DR. RISHI BHARGAVA</div>
+        <div class="testi-role">Managing Director, Medwin Clinic</div>
+      </div>
+      </div>
+      <div class="testi-card" aria-hidden="true">
+        <div class="logo-wrap"><img src="assets/images/image_076.png" alt="M Fitness Culture logo"></div>
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Working with HRIDDHIX was a great experience. The team understood our vision and transformed it into clean, impactful visuals that truly represent M Fitness Culture. Their creativity, attention to detail, and professionalism made the entire process smooth. Highly recommended for anyone looking for quality design and creative work.</p>
+        <div class="testi-meta">
+        <div class="testi-name">MR. SHUBHAM BHOLE</div>
+        <div class="testi-role">Director, M Fitness Culture</div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-section reveal">
+    <img class="contact-logo" id="contactLogo" src="assets/images/image_077.png" alt="Hriddhix">
+    <div class="contact-left">
+      <div class="section-tag" style="color:var(--purple);">Contact Us</div>
+      <h2>Let's Build Something Great Together!</h2>
+      <p>Whether you're starting a new business or refreshing your brand, We'd love to hear about your project.</p>
+      <div class="cta-row">
+        <a href="https://wa.me/918169657724?text=Hi%20Hrishi!%F0%9F%91%8B%0AI%27m%20interested%20in%20your%20design%20services.%20I%20have%20a%20project%20requirement%20and%20would%20like%20to%20discuss%20it%20with%20you" target="_blank" rel="noopener" class="submit-btn">
+          <svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.3-63.3-28.3-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.5 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          Whatsapp
+        </a>
+        <a href="tel:+918169657724" class="submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Let's Talk!
+        </a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=hriddhix@gmail.com&su=New%20Project%20Inquiry" target="_blank" rel="noopener" class="submit-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Mail
+        </a>
+      </div>
+      <div class="social-row">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="LinkedIn" class="icon-solid"><svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 01107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg></a>
+        <a href="#" aria-label="Behance" class="icon-solid"><svg viewBox="0 0 16 16"><path d="M4.654 3c.461 0 .887.035 1.278.14.39.07.711.216.996.391s.497.426.641.747c.14.32.216.711.216 1.137 0 .496-.106.922-.356 1.242-.215.32-.566.606-.997.817.606.176 1.067.496 1.348.922s.461.957.461 1.563c0 .496-.105.922-.285 1.278a2.3 2.3 0 0 1-.782.887c-.32.215-.711.39-1.137.496a5.3 5.3 0 0 1-1.278.176L0 12.803V3zm-.285 3.978c.39 0 .71-.105.957-.285.246-.18.355-.497.355-.887 0-.216-.035-.426-.105-.567a1 1 0 0 0-.32-.355 1.8 1.8 0 0 0-.461-.176c-.176-.035-.356-.035-.567-.035H2.17v2.31c0-.005 2.2-.005 2.2-.005zm.105 4.193c.215 0 .426-.035.606-.07.176-.035.356-.106.496-.216s.25-.215.356-.39c.07-.176.14-.391.14-.641 0-.496-.14-.852-.426-1.102-.285-.215-.676-.32-1.137-.32H2.17v2.734h2.305zm6.858-.035q.428.427 1.278.426c.39 0 .746-.106 1.032-.286q.426-.32.53-.64h1.74c-.286.851-.712 1.457-1.278 1.848-.566.355-1.243.566-2.06.566a4.1 4.1 0 0 1-1.527-.285 2.8 2.8 0 0 1-1.137-.782 2.85 2.85 0 0 1-.712-1.172c-.175-.461-.25-.957-.25-1.528 0-.531.07-1.032.25-1.493.18-.46.426-.852.747-1.207.32-.32.711-.606 1.137-.782a4 4 0 0 1 1.493-.285c.606 0 1.137.105 1.598.355.46.25.817.532 1.102.958.285.39.496.851.641 1.348.07.496.105.996.07 1.563h-5.15c0 .58.21 1.11.496 1.396m2.24-3.732c-.25-.25-.642-.391-1.103-.391-.32 0-.566.07-.781.176s-.356.25-.496.39a.96.96 0 0 0-.25.497c-.036.175-.07.32-.07.46h3.196c-.07-.526-.25-.882-.497-1.132zm-3.127-3.728h3.978v.957h-3.978z"/></svg></a>
+      </div>
+      <div class="contact-location">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Maharashtra, India
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#home" class="logo-group"><img class="logo-full" src="assets/images/image_078.png" alt="Hriddhix"></a>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Studio</h5>
+          <a href="#about">About Us</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <a href="#contact">Contact</a>
+          <a href="mailto:hello@hrixstudio.com">Email</a>
+          <a href="#">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Hriddhix. All rights reserved.</span>
+      <span>Design. Create. <b class="inspire-bold">Inspire.</b></span>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close full view">&times;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+
+
+<script>
+(function(){
+  // Portfolio video guard: only the currently active/visible video may ever
+  // play. Any video that stops being the active one — because another one
+  // started, it scrolled out of view, its panel/subtab/category was closed,
+  // or the whole portfolio overlay was closed/backed out of — is paused AND
+  // reset to 0:00, so nothing keeps running off-screen and nothing resumes
+  // mid-way when the user comes back to it later.
+  function resetVideo(v){
+    if(!v || v.tagName !== 'VIDEO') return;
+    v.pause();
+    try { v.currentTime = 0; } catch(err) {}
+  }
+  function resetAllVideosExcept(exception){
+    document.querySelectorAll('video').forEach(v=>{
+      if(v !== exception) resetVideo(v);
+    });
+  }
+  function resetVideosWithin(container){
+    if(!container) return;
+    container.querySelectorAll('video').forEach(resetVideo);
+  }
+
+  // Scroll progress
+  const progress = document.getElementById('scrollProgress');
+  function updateProgress(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+  }
+  document.addEventListener('scroll', updateProgress, {passive:true});
+
+  // Nav scroll state (compact/hamburger mode — unrelated to logo visibility)
+  const nav = document.getElementById('siteNav');
+  function updateNav(){
+    if(window.scrollY > 40){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+  }
+  document.addEventListener('scroll', updateNav, {passive:true});
+  updateNav(); updateProgress();
+
+  // H-icon visibility: only once the full hero wordmark has completely
+  // scrolled out of view, and hidden again the moment the contact section's
+  // logo comes into view — so the two logos never appear at the same time.
+  (function(){
+    const heroLogo = document.querySelector('.hero-wordmark');
+    const contactLogo = document.getElementById('contactLogo');
+    if(!heroLogo || !contactLogo) return;
+    let heroFullyOut = false;
+    let contactVisible = false;
+    function refresh(){
+      nav.classList.toggle('show-h-icon', heroFullyOut && !contactVisible);
+    }
+    const heroObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        // "Fully out of view" = not intersecting AND it has left upward
+        // (bottom edge above the viewport), not merely not-yet-reached.
+        heroFullyOut = !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
+        refresh();
+      });
+    }, {threshold:0});
+    heroObserver.observe(heroLogo);
+    const contactObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        contactVisible = entry.isIntersecting;
+        refresh();
+      });
+    }, {threshold:0.05});
+    contactObserver.observe(contactLogo);
+  })();
+
+  // Active link highlight
+  // "portfolio" is intentionally excluded: it now lives in a fixed full-screen
+  // overlay rather than the normal scroll flow, so it must not participate in scroll-spy.
+  const sections = ['home','about','services','contact'].map(id=>document.getElementById(id));
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const navLinksNav = document.getElementById('navLinks');
+
+  // Only one underline visible at a time: while the pointer is inside the
+  // nav, suppress the active item's permanent underline (CSS handles this
+  // via the "hovering" class) so it doesn't show alongside the hovered item.
+  if(navLinksNav){
+    navLinksNav.addEventListener('mouseenter', ()=> navLinksNav.classList.add('hovering'));
+    navLinksNav.addEventListener('mouseleave', ()=> navLinksNav.classList.remove('hovering'));
+  }
+
+  // Nav hover text-scramble: on hover, letters briefly randomize left-to-right
+  // then resolve back to the original word. Text length/content is preserved
+  // (only characters swap) so layout, spacing, and font metrics never change.
+  (function(){
+    const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const DURATION = 380; // ms — fast and subtle
+
+    function runScramble(el){
+      if(el.dataset.scrambling === '1') return;
+      const original = el.dataset.originalText || el.textContent;
+      el.dataset.originalText = original;
+      el.dataset.scrambling = '1';
+      const len = original.length;
+      const start = performance.now();
+
+      function frame(now){
+        const progress = Math.min((now - start) / DURATION, 1);
+        const revealCount = Math.floor(progress * len);
+        let out = '';
+        for(let i = 0; i < len; i++){
+          const ch = original[i];
+          if(ch === ' ' || i < revealCount){
+            out += ch;
+          } else {
+            out += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+          }
+        }
+        el.textContent = out;
+        if(progress < 1){
+          requestAnimationFrame(frame);
+        } else {
+          el.textContent = original;
+          el.dataset.scrambling = '0';
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    navLinks.forEach(link => {
+      link.dataset.originalText = link.textContent;
+      link.addEventListener('mouseenter', () => runScramble(link));
+    });
+  })();
+
+  const navObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        navLinks.forEach(l=>l.classList.remove('active'));
+        const match = document.querySelector('.nav-links a[href="#'+entry.target.id+'"]');
+        if(match){
+          match.classList.add('active');
+        }
+      }
+    });
+  }, {rootMargin:'-45% 0px -45% 0px'});
+  sections.forEach(s=> s && navObserver.observe(s));
+
+  // Mobile menu
+  const toggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuBackdrop = document.getElementById('mobileMenuBackdrop');
+  function closeMobileMenu(){
+    mobileMenu.classList.remove('open');
+    toggle.classList.remove('open');
+    mobileMenuBackdrop.classList.remove('open');
+  }
+  function openMobileMenu(){
+    mobileMenu.classList.add('open');
+    toggle.classList.add('open');
+    mobileMenuBackdrop.classList.add('open');
+  }
+  toggle.addEventListener('click', ()=>{
+    if(mobileMenu.classList.contains('open')) closeMobileMenu(); else openMobileMenu();
+  });
+  mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMobileMenu));
+  mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+  // Swipe right on the menu panel to dismiss it
+  let touchStartX = 0, touchCurrentX = 0, isSwiping = false;
+  mobileMenu.addEventListener('touchstart', (e)=>{
+    touchStartX = e.touches[0].clientX;
+    isSwiping = true;
+  }, {passive:true});
+  mobileMenu.addEventListener('touchmove', (e)=>{
+    if(!isSwiping) return;
+    touchCurrentX = e.touches[0].clientX;
+  }, {passive:true});
+  mobileMenu.addEventListener('touchend', ()=>{
+    if(isSwiping && (touchCurrentX - touchStartX) > 60){
+      closeMobileMenu();
+    }
+    isSwiping = false;
+    touchStartX = 0;
+    touchCurrentX = 0;
+  });
+
+  // Single custom cursor: solid black dot that follows the mouse and grows
+  // into a difference-blend circle (invert effect) over interactive elements.
+  const cursor = document.getElementById('cursorDot');
+  window.addEventListener('mousemove', (e)=>{
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    cursor.classList.add('active');
+  });
+  document.querySelectorAll('a, button, .service-card, .nav-links a, .nav-cta').forEach(el=>{
+    el.addEventListener('mouseenter', ()=> cursor.classList.add('grow'));
+    el.addEventListener('mouseleave', ()=> cursor.classList.remove('grow'));
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.15});
+  revealEls.forEach(el=> revealObserver.observe(el));
+
+  // Process line fill + step highlight
+  const processTrack = document.querySelector('.process-track');
+  const processFill = document.getElementById('processFill');
+  const steps = document.querySelectorAll('.process-step');
+  const processObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        processFill.style.width = '100%';
+        steps.forEach((s,i)=> setTimeout(()=> s.classList.add('in-view'), i*180));
+        processObserver.disconnect();
+      }
+    });
+  }, {threshold:.3});
+  if(processTrack) processObserver.observe(processTrack);
+
+  // Portfolio: the black pill tabs are now the only controls. Each tab opens
+  // its panel (via the matching invisible anchor + the collapse right after
+  // it), closes any other open panel, and scrolls to it.
+  (function setupPortfolioTabs(){
+    const tabs = document.querySelectorAll('.portfolio-tabs button');
+    if (!tabs.length) return;
+
+    function getPanel(anchor){
+      const panel = anchor && anchor.nextElementSibling;
+      return (panel && panel.classList.contains('portfolio-collapse')) ? panel : null;
+    }
+    function closePanel(anchor){
+      const panel = getPanel(anchor);
+      if (!panel) return;
+      resetVideosWithin(panel);
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      requestAnimationFrame(() => { panel.style.maxHeight = '0px'; });
+      anchor.dataset.open = '0';
+    }
+    // Collapses instantly (no transition) so layout is final before we measure scroll position
+    function closePanelInstant(anchor){
+      const panel = getPanel(anchor);
+      if (!panel) return;
+      resetVideosWithin(panel);
+      const prevTransition = panel.style.transition;
+      panel.style.transition = 'none';
+      panel.style.maxHeight = '0px';
+      void panel.offsetHeight; // force reflow so the collapse applies immediately
+      panel.style.transition = prevTransition;
+      anchor.dataset.open = '0';
+    }
+    function openPanel(anchor){
+      const panel = getPanel(anchor);
+      if (!panel) return;
+      anchor.dataset.open = '1';
+      panel.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('in-view'));
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      requestAnimationFrame(() => { panel.style.maxHeight = panel.scrollHeight + 'px'; });
+      setTimeout(() => {
+        if (anchor.dataset.open === '1') panel.style.maxHeight = panel.scrollHeight + 'px';
+      }, 300);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('data-target');
+        const anchor = document.getElementById(targetId);
+        if (!anchor) return;
+
+        const alreadyOpen = anchor.dataset.open === '1';
+
+        tabs.forEach(t => t.classList.remove('active'));
+        // close any other open panel instantly first, so the page layout is
+        // final before we measure where to scroll to
+        document.querySelectorAll('.portfolio-anchor').forEach(a => { if (a !== anchor) closePanelInstant(a); });
+
+        if (alreadyOpen) {
+          closePanel(anchor);
+        } else {
+          tab.classList.add('active');
+          openPanel(anchor);
+        }
+        // Intentionally no scrollIntoView / window.scrollTo / focus here —
+        // the panel already renders directly below its tab row, and the
+        // page must stay at the exact scroll position the user was at.
+      });
+    });
+
+    // keep the open panel sized correctly on resize
+    window.addEventListener('resize', () => {
+      document.querySelectorAll('.portfolio-anchor').forEach(anchor => {
+        if (anchor.dataset.open === '1') {
+          const panel = getPanel(anchor);
+          if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
+        }
+      });
+    });
+  })();
+
+  // Portfolio subsection tabs (e.g. "Poster Design", "Motion Poster") — each
+  // group starts with its subsections collapsed; tapping one expands just
+  // that subsection and re-measures its parent group panel so nothing clips.
+  (function setupPortfolioSubtabs(){
+    const subtabs = document.querySelectorAll('.portfolio-subtabs button');
+    if (!subtabs.length) return;
+
+    function getSubPanel(subanchor){
+      const panel = subanchor && subanchor.nextElementSibling;
+      return (panel && panel.classList.contains('portfolio-collapse')) ? panel : null;
+    }
+    function resizeAncestorPanels(el){
+      let node = el.parentElement;
+      while (node) {
+        if (node.classList && node.classList.contains('portfolio-collapse') && node.style.maxHeight && node.style.maxHeight !== '0px') {
+          node.style.maxHeight = node.scrollHeight + 'px';
+        }
+        node = node.parentElement;
+      }
+    }
+
+    function closeSubtab(btn, panel){
+      resetVideosWithin(panel);
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        panel.style.maxHeight = '0px';
+        resizeAncestorPanels(panel);
+      });
+      btn.classList.remove('open');
+    }
+    function openSubtab(btn, panel){
+      btn.classList.add('open');
+      panel.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('in-view'));
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      resizeAncestorPanels(panel);
+      requestAnimationFrame(() => {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        resizeAncestorPanels(panel);
+      });
+      setTimeout(() => {
+        if (btn.classList.contains('open')) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          resizeAncestorPanels(panel);
+        }
+      }, 300);
+    }
+
+    subtabs.forEach(btn => {
+      const subanchor = document.getElementById(btn.getAttribute('data-subtarget'));
+      const panel = getSubPanel(subanchor);
+      if (!panel) return;
+      const row = btn.closest('.portfolio-subtabs');
+
+      btn.addEventListener('click', () => {
+        const isOpen = btn.classList.contains('open');
+
+        // close any other open subtab in the same group's row first
+        if (row) {
+          row.querySelectorAll('button.open').forEach(otherBtn => {
+            if (otherBtn === btn) return;
+            const otherAnchor = document.getElementById(otherBtn.getAttribute('data-subtarget'));
+            const otherPanel = getSubPanel(otherAnchor);
+            if (otherPanel) closeSubtab(otherBtn, otherPanel);
+          });
+        }
+
+        if (isOpen) {
+          closeSubtab(btn, panel);
+        } else {
+          openSubtab(btn, panel);
+        }
+      });
+    });
+  })();
+
+  // Populate the "All" portfolio grid by cloning cards from every category,
+  // interleaved so images and videos are mixed rather than grouped.
+  (function buildAllGrid(){
+    const allGrid = document.getElementById('portfolioAllGrid');
+    if (!allGrid) return;
+    const imgCards = Array.from(document.querySelectorAll('.portfolio-card')).map(el => el.cloneNode(true));
+    const vidCards = Array.from(document.querySelectorAll('.portfolio-video-card')).map(el => el.cloneNode(true));
+
+    // simple deterministic shuffle so the mix looks varied but is stable on reload
+    function shuffle(arr, seed){
+      let s = seed;
+      const rand = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+    shuffle(imgCards, 7);
+    shuffle(vidCards, 13);
+
+    const mixed = [];
+    let vi = 0;
+    imgCards.forEach((card, i) => {
+      mixed.push(card);
+      if ((i + 1) % 3 === 0 && vi < vidCards.length) {
+        mixed.push(vidCards[vi]);
+        vi++;
+      }
+    });
+    while (vi < vidCards.length) { mixed.push(vidCards[vi]); vi++; }
+
+    mixed.forEach(card => allGrid.appendChild(card));
+  })();
+
+  // Open the "All" portfolio panel by default so it's active and visible as
+  // soon as the Portfolio section loads, without requiring a click. Runs
+  // after the All grid is built above. All other panels remain closed/unchanged.
+  (function openAllPanelByDefault(){
+    const anchor = document.getElementById('pf-all');
+    if (!anchor) return;
+    const panel = anchor.nextElementSibling;
+    if (!panel || !panel.classList.contains('portfolio-collapse')) return;
+    anchor.dataset.open = '1';
+    panel.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('in-view'));
+
+    // Use 'none' rather than a scrollHeight snapshot: at this point the grid's
+    // images have just been inserted and haven't finished loading yet, so
+    // scrollHeight would measure a too-small height and clip the images into
+    // thin strips (max-height + overflow:hidden on .portfolio-collapse). 'none'
+    // lets the panel size itself to its real content, including images that
+    // load progressively, with no cropping.
+    panel.style.maxHeight = 'none';
+
+    // Once every image in the panel has actually loaded, re-measure with a
+    // concrete pixel value so this panel behaves identically to any other
+    // panel the user opens by clicking a tab (consistent for the resize
+    // handler and for closing it again via the "All" tab).
+    const imgs = Array.from(panel.querySelectorAll('img'));
+    let pending = imgs.filter(img => !img.complete).length;
+    function finalize(){
+      if (anchor.dataset.open === '1') panel.style.maxHeight = panel.scrollHeight + 'px';
+    }
+    if (pending === 0) {
+      finalize();
+    } else {
+      imgs.forEach(img => {
+        if (img.complete) return;
+        img.addEventListener('load', () => { pending--; if (pending === 0) finalize(); });
+        img.addEventListener('error', () => { pending--; if (pending === 0) finalize(); });
+      });
+      // Safety net in case some 'load' events are missed
+      window.addEventListener('load', finalize, { once: true });
+    }
+  })();
+
+  // Portfolio image lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxClose = document.getElementById('lightboxClose');
+  document.querySelectorAll('.portfolio-card img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+
+  // Portfolio: only one video plays at a time (fully stop + reset any other
+  // video the moment a new one starts, so nothing keeps playing behind it)
+  document.addEventListener('play', (e)=>{
+    if(e.target.tagName === 'VIDEO'){
+      resetAllVideosExcept(e.target);
+    }
+  }, true);
+
+  // Portfolio: stop + reset a video as soon as it scrolls out of the
+  // viewport while playing, so it never keeps running in the background
+  const portfolioVideoVisibilityObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting && !entry.target.paused){
+        resetVideo(entry.target);
+      }
+    });
+  }, {threshold:0});
+  document.querySelectorAll('#portfolioOverlay video').forEach(v=>{
+    portfolioVideoVisibilityObserver.observe(v);
+  });
+
+  // Testimonial logo marquee: auto-scroll (right-to-left, infinite loop) + free drag/swipe + hover pause
+  (function(){
+    const wrap = document.querySelector('.logo-marquee-wrap');
+    const track = document.getElementById('testiTrack');
+    if(!wrap || !track) return;
+
+    let halfWidth = 0;
+    function measure(){
+      // Track content is duplicated (two identical sets) so it can loop seamlessly at the halfway point
+      halfWidth = track.scrollWidth / 2;
+    }
+    measure();
+    window.addEventListener('resize', measure);
+
+    let position = 0;           // current translateX, in px (0 or negative)
+    const AUTO_SPEED = 40;      // px per second, matches the previous ~50s/loop pace
+    const DECAY_RATE = 3.2;     // higher = friction kicks in faster (1/second, exponential decay)
+    const MIN_VELOCITY = 24;    // px/second — below this, momentum is considered "at rest"
+    let isHovering = false;
+    let isDragging = false;
+    let isMomentum = false;     // true while coasting on released-swipe velocity
+    let velocity = 0;           // current momentum velocity, px per second
+    let lastFrameTime = null;
+
+    function wrap_position(){
+      if(halfWidth <= 0) return;
+      // Keep position within one loop's width in either direction for seamless infinite scroll
+      while(position <= -halfWidth) position += halfWidth;
+      while(position > 0) position -= halfWidth;
+    }
+
+    function render(){
+      track.style.transform = 'translateX(' + position + 'px)';
+    }
+
+    function frame(t){
+      if(lastFrameTime === null) lastFrameTime = t;
+      const dt = (t - lastFrameTime) / 1000;
+      lastFrameTime = t;
+
+      if(isDragging){
+        // position is driven directly by pointerMove while the user has active control
+      } else if(isMomentum){
+        position += velocity * dt;
+        velocity *= Math.exp(-DECAY_RATE * dt);
+        if(Math.abs(velocity) < MIN_VELOCITY){
+          // Momentum has naturally settled — hand control back to the default auto-scroll
+          isMomentum = false;
+          velocity = 0;
+        }
+        wrap_position();
+        render();
+      } else if(!isHovering){
+        position -= AUTO_SPEED * dt;
+        wrap_position();
+        render();
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    wrap.addEventListener('mouseenter', ()=>{ isHovering = true; });
+    wrap.addEventListener('mouseleave', ()=>{ isHovering = false; });
+
+    // Drag / swipe: native-feeling inertia. Dragging tracks the pointer 1:1; on release the
+    // carousel keeps moving at the swipe's velocity and decelerates smoothly under friction.
+    // Touching down again — even mid-momentum — immediately hands control back to the pointer.
+    let dragStartX = 0;
+    let dragStartPosition = 0;
+    let moveHistory = [];       // recent {t, x} samples, used to compute release velocity
+
+    function pointerDown(e){
+      isDragging = true;
+      isMomentum = false;       // interrupt any in-flight momentum instantly
+      velocity = 0;
+      track.classList.add('dragging');
+      const x = (e.touches ? e.touches[0].clientX : e.clientX);
+      dragStartX = x;
+      dragStartPosition = position;
+      moveHistory = [{ t: e.timeStamp || performance.now(), x }];
+      if(e.pointerId !== undefined && track.setPointerCapture){
+        try{ track.setPointerCapture(e.pointerId); }catch(err){}
+      }
+    }
+    function pointerMove(e){
+      if(!isDragging) return;
+      const x = (e.touches ? e.touches[0].clientX : e.clientX);
+      const delta = x - dragStartX;
+      position = dragStartPosition + delta;
+      wrap_position();
+      render();
+      const now = e.timeStamp || performance.now();
+      moveHistory.push({ t: now, x });
+      // Keep a short rolling window so release velocity reflects the most recent swipe motion
+      while(moveHistory.length > 2 && now - moveHistory[0].t > 100){
+        moveHistory.shift();
+      }
+    }
+    function pointerUp(){
+      if(!isDragging) return;
+      isDragging = false;
+      track.classList.remove('dragging');
+
+      // Derive release velocity from the recent pointer history (px per second)
+      let releaseVelocity = 0;
+      if(moveHistory.length >= 2){
+        const first = moveHistory[0];
+        const last = moveHistory[moveHistory.length - 1];
+        const elapsed = (last.t - first.t) / 1000;
+        if(elapsed > 0){
+          releaseVelocity = (last.x - first.x) / elapsed;
+        }
+      }
+      moveHistory = [];
+
+      if(Math.abs(releaseVelocity) > MIN_VELOCITY){
+        velocity = releaseVelocity;
+        isMomentum = true;
+      } else {
+        velocity = 0;
+        isMomentum = false;
+      }
+    }
+
+    track.addEventListener('pointerdown', pointerDown);
+    window.addEventListener('pointermove', pointerMove);
+    window.addEventListener('pointerup', pointerUp);
+    window.addEventListener('pointercancel', pointerUp);
+    // Touch fallback for browsers/environments without full Pointer Events support
+    track.addEventListener('touchstart', pointerDown, {passive:true});
+    track.addEventListener('touchmove', pointerMove, {passive:true});
+    track.addEventListener('touchend', pointerUp);
+    track.addEventListener('touchcancel', pointerUp);
+    // Prevent the browser's native image/text drag ghost from interfering
+    track.addEventListener('dragstart', (e)=> e.preventDefault());
+  })();
+
+  // Portfolio full-screen overlay: PORTFOLIO / VIEW PORTFOLIO links open the
+  // complete portfolio as a full-screen view on the same URL (no hash/route
+  // change), hiding the homepage behind it. All existing portfolio behavior
+  // (tabs, filters, lightbox, reveal animations) is untouched — this only
+  // controls whether the section is shown full-screen or off-screen.
+  (function setupPortfolioOverlay(){
+    const overlay = document.getElementById('portfolioOverlay');
+    const closeBtn = document.getElementById('portfolioOverlayClose');
+    const openLinks = document.querySelectorAll('a[href="#portfolio"]');
+    if(!overlay || !openLinks.length) return;
+
+    function setHomepageHidden(hidden){
+      Array.from(document.body.children).forEach(el => {
+        if(el === overlay || el.tagName === 'SCRIPT') return;
+        if(hidden){
+          if(!el.hasAttribute('data-pf-prev-aria-hidden')){
+            el.setAttribute('data-pf-prev-aria-hidden', el.getAttribute('aria-hidden') || '');
+          }
+          el.setAttribute('aria-hidden','true');
+          el.setAttribute('inert','');
+        } else {
+          const prev = el.getAttribute('data-pf-prev-aria-hidden');
+          if(prev){ el.setAttribute('aria-hidden', prev); } else { el.removeAttribute('aria-hidden'); }
+          el.removeAttribute('data-pf-prev-aria-hidden');
+          el.removeAttribute('inert');
+        }
+      });
+    }
+
+    function openPortfolioOverlay(){
+      if(typeof closeMobileMenu === 'function') closeMobileMenu();
+      setHomepageHidden(true);
+      overlay.removeAttribute('aria-hidden');
+      overlay.classList.add('open');
+      document.body.classList.add('portfolio-lock');
+      overlay.scrollTop = 0;
+    }
+    function closePortfolioOverlay(){
+      resetVideosWithin(overlay);
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden','true');
+      document.body.classList.remove('portfolio-lock');
+      setHomepageHidden(false);
+    }
+
+    openLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openPortfolioOverlay();
+      });
+    });
+    closeBtn.addEventListener('click', closePortfolioOverlay);
+    const overlayLogo = overlay.querySelector('.portfolio-overlay-bar a[href="#home"]');
+    if(overlayLogo){
+      overlayLogo.addEventListener('click', (e) => {
+        e.preventDefault();
+        closePortfolioOverlay();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key !== 'Escape') return;
+      if(!overlay.classList.contains('open')) return;
+      // Let the image lightbox handle Escape first if it's open on top of the overlay
+      const lightboxEl = document.getElementById('lightbox');
+      if(lightboxEl && lightboxEl.classList.contains('open')) return;
+      closePortfolioOverlay();
+    });
+  })();
+
+})();
+</script>
+
+</body>
+</html>
