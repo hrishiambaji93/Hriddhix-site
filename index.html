@@ -515,37 +515,6 @@
   }
 
   /* ---------- Portfolio grid ---------- */
-  .portfolio-tabs{
-    display:flex; flex-wrap:wrap; gap:16px; align-items:center;
-    margin:34px 0 54px;
-  }
-  .portfolio-tabs button{
-    font-family:inherit; font-size:19px; font-weight:400; letter-spacing:.3px; position:relative;
-    padding:16px 28px; border-radius:9px; background:var(--white); color:var(--black);
-    border:1px solid var(--brand-dark); cursor:pointer; height:56px; box-sizing:border-box;
-    transition:background .25s ease, color .25s ease, border-color .25s ease; white-space:nowrap;
-    display:inline-flex; align-items:center; gap:10px;
-  }
-  .portfolio-tabs button.active{
-    background:var(--brand-dark); color:var(--white); border-color:var(--brand-dark);
-  }
-  .portfolio-tabs button:hover:not(.active){
-    background:var(--brand-dark); color:var(--white); border-color:var(--brand-dark);
-  }
-  .portfolio-tabs .pill-chevron{
-    display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px;
-    border-radius:50%; border:1px solid var(--brand-dark); flex-shrink:0;
-    transition:border-color .25s ease;
-  }
-  .portfolio-tabs .pill-chevron svg{width:10px; height:10px; stroke:var(--black); transition:stroke .25s ease, transform .35s var(--ease);}
-  .portfolio-tabs button.active .pill-chevron{border-color:var(--white);}
-  .portfolio-tabs button.active .pill-chevron svg{stroke:var(--white);}
-  .portfolio-tabs button:hover:not(.active) .pill-chevron{border-color:var(--white);}
-  .portfolio-tabs button:hover:not(.active) .pill-chevron svg{stroke:var(--white);}
-  .portfolio-tabs button.active .pill-chevron svg{transform:rotate(180deg);}
-  @media (max-width:700px){
-    .portfolio-tabs{width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
-  }
   .portfolio-group-tag{
     font-size:13px; font-weight:400; letter-spacing:2.5px; text-transform:uppercase; color:var(--black);
     padding-bottom:14px; border-bottom:1px solid var(--grey-line);
@@ -564,20 +533,6 @@
   .portfolio-toggle.open .toggle-chevron{background:var(--brand-dark); border-color:var(--brand-dark);}
   .portfolio-toggle.open .toggle-chevron svg{stroke:var(--white); transform:rotate(180deg);}
 
-  .portfolio-subtabs{
-    display:flex; flex-wrap:wrap; gap:20px; margin:6px 0 34px;
-  }
-  .portfolio-subtabs button{
-    font-family:inherit; cursor:pointer; user-select:none; display:flex; align-items:center; gap:9px;
-    background:none; border:none; padding:0;
-    font-size:18px; font-weight:400; letter-spacing:.3px; color:var(--black);
-  }
-  .subtoggle-chevron{
-    display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
-    border-radius:50%; border:1px solid var(--brand-dark); background:transparent; flex-shrink:0; transition:transform .35s var(--ease);
-  }
-  .subtoggle-chevron svg{width:11px; height:11px; stroke:var(--black); transition:transform .35s var(--ease);}
-  .portfolio-subtabs button.open .subtoggle-chevron svg{transform:rotate(180deg);}
   .portfolio-subanchor{
     height:0; margin:0; padding:0; scroll-margin-top:110px;
   }
@@ -585,20 +540,15 @@
     height:0; margin:0; padding:0; scroll-margin-top:110px;
   }
   .portfolio-collapse{
-    overflow:hidden; max-height:0; transition:max-height .5s var(--ease);
+    display:grid; grid-template-rows:0fr; transition:grid-template-rows .5s var(--ease);
+  }
+  .portfolio-collapse.pc-open{ grid-template-rows:1fr; }
+  .portfolio-collapse > .pc-inner{
+    overflow:hidden; min-height:0; padding-bottom:4px;
   }
   .portfolio-grid{
     display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:20px; align-items:start;
     background:var(--grey-line); border:1px solid var(--grey-line);
-  }
-  .portfolio-grid.portfolio-grid-all{
-    grid-template-columns:repeat(3,1fr);
-  }
-  @media (max-width:1000px){
-    .portfolio-grid.portfolio-grid-all{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:640px){
-    .portfolio-grid.portfolio-grid-all{grid-template-columns:1fr;}
   }
   .portfolio-card{
     position:relative; z-index:5; overflow:hidden; background:var(--white);
@@ -641,6 +591,25 @@
   }
   @media (max-width:560px){
     .portfolio-video-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Portfolio project credits (minimal, understated) ---------- */
+  .pf-credits{
+    margin-top:16px; padding-top:14px; border-top:1px solid rgba(39,3,6,.12);
+    display:flex; flex-direction:column; gap:4px;
+  }
+  .pf-credits p{
+    font-family:'Sequel Sans Book Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:400; font-size:12px; letter-spacing:1px; text-transform:uppercase;
+    color:var(--brand-dark); opacity:.5; margin:0; line-height:1.6;
+  }
+  .pf-credits p .pf-value{
+    font-family:'Sequel Sans Bold Head', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:500;
+  }
+  @media (max-width:640px){
+    .pf-credits{ margin-top:14px; padding-top:12px; }
+    .pf-credits p{ font-size:11px; letter-spacing:.8px; }
   }
 
 
@@ -751,6 +720,9 @@
     transition:filter .4s var(--ease), opacity .4s var(--ease);
   }
   .testi-card:hover .logo-wrap img{ filter:grayscale(0%); opacity:1; }
+  .testi-card .logo-wrap .logo-placeholder{
+    font-size:20px; font-weight:400; letter-spacing:.14em; line-height:1; color:var(--black); opacity:.85; white-space:nowrap;
+  }
   .testi-card .quote-mark{font-size:34px; color:#000000; font-weight:400; line-height:0; display:block; margin-bottom:8px;}
   .testi-card .quote-text{
     font-size:14.5px; line-height:1.68; color:var(--grey);
@@ -930,15 +902,9 @@
     .service-card .s-tags span{ font-size:11.5px; padding:5px 11px; }
 
     /* ---------- Portfolio ---------- */
-    .portfolio-tabs{ gap:10px; margin:22px 0 30px; }
-    .portfolio-tabs button{ font-size:14px; padding:11px 18px; height:44px; gap:7px; }
     .portfolio-group-tag{ font-size:11px; padding-bottom:10px; }
     .portfolio-category{ font-size:11px; margin-bottom:18px; }
-    .portfolio-subtabs{ gap:14px; margin:6px 0 24px; }
-    .portfolio-subtabs button{ font-size:15px; gap:7px; }
-    .subtoggle-chevron{ width:19px; height:19px; }
     .portfolio-grid{ grid-template-columns:1fr !important; }
-    .portfolio-grid.portfolio-grid-all{ grid-template-columns:1fr !important; }
     .portfolio-video-grid{ grid-template-columns:1fr !important; }
     .portfolio-card .pc-overlay{ padding:18px; opacity:1; background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.82) 100%); }
     .portfolio-card .pc-title{ font-size:17px; }
@@ -1097,7 +1063,7 @@
     </div>
     <div class="hero-overview reveal">
       <div class="hero-overview-label">Overview</div>
-      <p class="hero-overview-text">Hriddhix is a creative design studio dedicated to helping businesses grow through thoughtful design, motion, and visual storytelling. Every project is crafted with creativity, purpose, and attention to detail to create lasting impact.</p>
+      <p class="hero-overview-text">Hriddhix is an independent creative production studio bringing brands to life through visual storytelling, cinematic filmmaking, commercial production, and thoughtful creative execution. From concept development to on-set production, we create compelling visual experiences that capture attention, communicate ideas, and help brands grow. Every project is driven by creativity, precision, and a vision to create lasting impact.</p>
     </div>
     <div class="hero-ctas-v2">
       <a href="#portfolio" class="hero-cta">View Portfolio</a>
@@ -1112,102 +1078,118 @@
   <div class="services-marquee-track">
     <div class="services-marquee-group">
         <div class="services-marquee-item">
-          <span class="services-marquee-word">DESIGN</span>
+          <span class="services-marquee-word">PRODUCTION</span>
           <img class="services-marquee-logo" src="assets/images/image_004.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">BRANDING</span>
+          <span class="services-marquee-word">FILMMAKING</span>
           <img class="services-marquee-logo" src="assets/images/image_005.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">MOTION</span>
+          <span class="services-marquee-word">CINEMATOGRAPHY</span>
           <img class="services-marquee-logo" src="assets/images/image_006.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">VIDEO</span>
+          <span class="services-marquee-word">DIRECTION</span>
           <img class="services-marquee-logo" src="assets/images/image_007.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">CREATIVITY</span>
+          <span class="services-marquee-word">LIGHTING</span>
           <img class="services-marquee-logo" src="assets/images/image_008.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">VISUALS</span>
+          <span class="services-marquee-word">ON-SET SHOOTING</span>
           <img class="services-marquee-logo" src="assets/images/image_009.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">EDITING</span>
+          <span class="services-marquee-word">COMMERCIAL FILMS</span>
           <img class="services-marquee-logo" src="assets/images/image_010.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">IDENTITY</span>
-          <img class="services-marquee-logo" src="assets/images/image_011.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
-          <span class="services-marquee-word">STORYTELLING</span>
-          <img class="services-marquee-logo" src="assets/images/image_012.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
-          <span class="services-marquee-word">DIGITAL</span>
-          <img class="services-marquee-logo" src="assets/images/image_013.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
-          <span class="services-marquee-word">PRINT</span>
-          <img class="services-marquee-logo" src="assets/images/image_014.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
           <span class="services-marquee-word">PRODUCTION</span>
-          <img class="services-marquee-logo" src="assets/images/image_015.png" alt="Hriddhix">
+          <img class="services-marquee-logo" src="assets/images/image_004.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">FILMMAKING</span>
+          <img class="services-marquee-logo" src="assets/images/image_005.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">CINEMATOGRAPHY</span>
+          <img class="services-marquee-logo" src="assets/images/image_006.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">DIRECTION</span>
+          <img class="services-marquee-logo" src="assets/images/image_007.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">LIGHTING</span>
+          <img class="services-marquee-logo" src="assets/images/image_008.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">ON-SET SHOOTING</span>
+          <img class="services-marquee-logo" src="assets/images/image_009.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">COMMERCIAL FILMS</span>
+          <img class="services-marquee-logo" src="assets/images/image_010.png" alt="Hriddhix">
         </div>
     </div>
     <div class="services-marquee-group" aria-hidden="true">
         <div class="services-marquee-item">
-          <span class="services-marquee-word">DESIGN</span>
+          <span class="services-marquee-word">PRODUCTION</span>
           <img class="services-marquee-logo" src="assets/images/image_016.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">BRANDING</span>
+          <span class="services-marquee-word">FILMMAKING</span>
           <img class="services-marquee-logo" src="assets/images/image_017.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">MOTION</span>
+          <span class="services-marquee-word">CINEMATOGRAPHY</span>
           <img class="services-marquee-logo" src="assets/images/image_018.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">VIDEO</span>
+          <span class="services-marquee-word">DIRECTION</span>
           <img class="services-marquee-logo" src="assets/images/image_019.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">CREATIVITY</span>
+          <span class="services-marquee-word">LIGHTING</span>
           <img class="services-marquee-logo" src="assets/images/image_020.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">VISUALS</span>
+          <span class="services-marquee-word">ON-SET SHOOTING</span>
           <img class="services-marquee-logo" src="assets/images/image_021.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">EDITING</span>
+          <span class="services-marquee-word">COMMERCIAL FILMS</span>
           <img class="services-marquee-logo" src="assets/images/image_022.png" alt="Hriddhix">
         </div>
         <div class="services-marquee-item">
-          <span class="services-marquee-word">IDENTITY</span>
-          <img class="services-marquee-logo" src="assets/images/image_023.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
-          <span class="services-marquee-word">STORYTELLING</span>
-          <img class="services-marquee-logo" src="assets/images/image_024.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
-          <span class="services-marquee-word">DIGITAL</span>
-          <img class="services-marquee-logo" src="assets/images/image_025.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
-          <span class="services-marquee-word">PRINT</span>
-          <img class="services-marquee-logo" src="assets/images/image_026.png" alt="Hriddhix">
-        </div>
-        <div class="services-marquee-item">
           <span class="services-marquee-word">PRODUCTION</span>
-          <img class="services-marquee-logo" src="assets/images/image_027.png" alt="Hriddhix">
+          <img class="services-marquee-logo" src="assets/images/image_016.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">FILMMAKING</span>
+          <img class="services-marquee-logo" src="assets/images/image_017.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">CINEMATOGRAPHY</span>
+          <img class="services-marquee-logo" src="assets/images/image_018.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">DIRECTION</span>
+          <img class="services-marquee-logo" src="assets/images/image_019.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">LIGHTING</span>
+          <img class="services-marquee-logo" src="assets/images/image_020.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">ON-SET SHOOTING</span>
+          <img class="services-marquee-logo" src="assets/images/image_021.png" alt="Hriddhix">
+        </div>
+        <div class="services-marquee-item">
+          <span class="services-marquee-word">COMMERCIAL FILMS</span>
+          <img class="services-marquee-logo" src="assets/images/image_022.png" alt="Hriddhix">
         </div>
     </div>
   </div>
@@ -1219,16 +1201,16 @@
     <div class="about-grid">
       <div class="reveal">
         <div class="section-tag">About Us</div>
-        <h2 class="section-title">Crafting brands with purpose &amp; precision.</h2>
+        <h2 class="section-title">Bringing ideas to life through visual storytelling.</h2>
       </div>
       <div>
         <div class="why-list reveal-stagger" style="margin-top:0;">
-          <div class="why-item"><span class="label">Creative Thinking</span><span class="idx">01</span></div>
-          <div class="why-item"><span class="label">Strategic Design</span><span class="idx">02</span></div>
-          <div class="why-item"><span class="label">Premium Quality</span><span class="idx">03</span></div>
-          <div class="why-item"><span class="label">Fast Communication</span><span class="idx">04</span></div>
-          <div class="why-item"><span class="label">Attention to Detail</span><span class="idx">05</span></div>
-          <div class="why-item"><span class="label">Client-Focused Approach</span><span class="idx">06</span></div>
+          <div class="why-item"><span class="label">Creative Direction</span><span class="idx">01</span></div>
+          <div class="why-item"><span class="label">Cinematic Production</span><span class="idx">02</span></div>
+          <div class="why-item"><span class="label">Professional Filmmaking</span><span class="idx">03</span></div>
+          <div class="why-item"><span class="label">Visual Storytelling</span><span class="idx">04</span></div>
+          <div class="why-item"><span class="label">Precision in Every Frame</span><span class="idx">05</span></div>
+          <div class="why-item"><span class="label">End-to-End Production</span><span class="idx">06</span></div>
         </div>
       </div>
     </div>
@@ -1241,50 +1223,34 @@
     <div class="services-head reveal">
       <div>
         <div class="section-tag">What We Do</div>
-        <h2 class="section-title">Services built for growing brands.</h2>
+        <h2 class="section-title">Every stage of production, under one roof.</h2>
       </div>
-      <p>From identity to motion to production, a full creative toolkit under one roof.</p>
+      <p>From first idea to final delivery, we handle pre-production, production and post-production.</p>
     </div>
     <div class="services-grid reveal-stagger">
       <div class="service-card">
         <div class="sc-top">
-          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.4 2.3 7.2L12 16.6l-6.3 4.4 2.3-7.2-6-4.4h7.6z"/></svg></div>
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
           <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
         </div>
-        <h3>Design &amp; Branding</h3>
-        <div class="s-tags"><span>Brand Identity</span><span>Logo Design</span><span>Brand Guidelines</span><span>Visual Identity</span></div>
-      </div>
-      <div class="service-card">
-        <div class="sc-top">
-          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l5-3v10l-5-3M4 6h9a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg></div>
-          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-        </div>
-        <h3>Video Editing &amp; Motion Graphics</h3>
-        <div class="s-tags"><span>Promotional Videos</span><span>Motion Graphics</span><span>Reels</span><span>Ads</span><span>Explainer Videos</span></div>
-      </div>
-      <div class="service-card">
-        <div class="sc-top">
-          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M21 6H8a4 4 0 00-4 4v1M7 22l-4-4 4-4M3 18h13a4 4 0 004-4v-1"/></svg></div>
-          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-        </div>
-        <h3>Social Media Marketing</h3>
-        <div class="s-tags"><span>Content Strategy</span><span>Content Creation</span><span>Creative Posts</span><span>Reels</span><span>Campaign Design</span></div>
-      </div>
-      <div class="service-card">
-        <div class="sc-top">
-          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg></div>
-          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-        </div>
-        <h3>Print Design</h3>
-        <div class="s-tags"><span>Brochures</span><span>Flyers</span><span>Business Cards</span><span>Packaging</span><span>Hoardings</span><span>Posters</span></div>
+        <h3>Pre-Production</h3>
+        <div class="s-tags"><span>Creative Direction</span><span>Concept Development</span><span>Scripting</span><span>Storyboarding</span><span>Location Planning</span><span>Shot Lists &amp; Scheduling</span></div>
       </div>
       <div class="service-card">
         <div class="sc-top">
           <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7zM14 5H3a2 2 0 00-2 2v10a2 2 0 002 2h11a2 2 0 002-2V7a2 2 0 00-2-2z"/></svg></div>
           <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
         </div>
-        <h3>Video Production</h3>
-        <div class="s-tags"><span>Creative Direction</span><span>Shooting</span><span>Commercial Production</span><span>Product Videos</span><span>Brand Films</span></div>
+        <h3>Production</h3>
+        <div class="s-tags"><span>Video Shooting</span><span>Camera &amp; Lighting</span><span>Product Shoots</span><span>Commercial Films</span><span>Brand Films</span><span>Corporate Shoots</span></div>
+      </div>
+      <div class="service-card">
+        <div class="sc-top">
+          <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12M6 9a3 3 0 100-6 3 3 0 000 6zM6 21a3 3 0 100-6 3 3 0 000 6z"/></svg></div>
+          <div class="s-arrow"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+        </div>
+        <h3>Post-Production</h3>
+        <div class="s-tags"><span>Video Editing</span><span>Colour Grading</span><span>Motion Graphics</span><span>Sound Design</span><span>Final Delivery</span></div>
       </div>
     </div>
   </div>
@@ -1311,307 +1277,7 @@
   </div>
 <section id="portfolio">
   <div class="container">
-    <div class="section-tag reveal">Our Work</div>
-    <h2 class="section-title reveal">Portfolio</h2>
-
-    <div class="portfolio-tabs reveal">
-      <button data-target="pf-all" class="active">All<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <button data-target="pf-design-branding">Design and Branding<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <button data-target="pf-video-motion">Video Editing &amp; Motion Graphics<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-      <button data-target="pf-print">Print<span class="pill-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-    </div>
-
-<div class="portfolio-anchor" id="pf-all"></div>
-    <div class="portfolio-collapse">
-    <div class="portfolio-grid portfolio-grid-all reveal-stagger in-view" id="portfolioAllGrid"></div>
-    </div>
-
-<div class="portfolio-anchor" id="pf-design-branding"></div>
-    <div class="portfolio-collapse">
-<div class="portfolio-subtabs reveal">
-<button data-subtarget="pfs-poster-design">Poster Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-<button data-subtarget="pfs-brand-identity">Brand Identity<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-</div>
-<div class="portfolio-subanchor" id="pfs-poster-design"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-grid reveal-stagger">
-      <div class="portfolio-card">
-        <img src="assets/images/image_028.jpg" alt="Poster design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Poster Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_029.jpg" alt="Poster design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Poster Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_030.jpg" alt="Poster design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Poster Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_031.jpg" alt="Poster design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Poster Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_032.jpg" alt="Poster design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Poster Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_033.jpg" alt="Poster design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Poster Design</div>
-        </div>
-      </div>
-    </div>
-</div>
-<div class="portfolio-subanchor" id="pfs-brand-identity"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-grid reveal-stagger">
-      <div class="portfolio-card">
-        <img src="assets/images/image_034.jpg" alt="Govalkar Laboratory branded pen mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_035.jpg" alt="Govalkar Laboratory branded face mask mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_036.jpg" alt="Govalkar Laboratory branded mug mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_037.jpg" alt="Govalkar Laboratory letterhead and envelope mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_038.jpg" alt="Govalkar Laboratory letterhead and envelope mockup, alternate version">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_039.jpg" alt="Govalkar Laboratory signage board mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_040.jpg" alt="Govalkar Laboratory billboard mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_041.jpg" alt="Govalkar Laboratory lab coat uniform collage mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_042.jpg" alt="Govalkar Laboratory logo over lab photo">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_043.jpg" alt="Govalkar Laboratory blood sample courier box mockup">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brand Identity</div>
-        </div>
-      </div>
-      <div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_044.jpg">
-          <source src="assets/videos/video_001.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Brand Identity</div>
-      </div>
-    </div>
-</div>
-
-    </div>
-
-<div class="portfolio-anchor" id="pf-video-motion"></div>
-    <div class="portfolio-collapse">
-<div class="portfolio-subtabs reveal">
-<button data-subtarget="pfs-motion-poster">Motion Poster<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-<button data-subtarget="pfs-motion-graphics">Motion Graphics<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-<button data-subtarget="pfs-video-editing">Video Editing<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-</div>
-<div class="portfolio-subanchor" id="pfs-motion-poster"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-video-grid reveal-stagger">
-<div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_045.jpg">
-          <source src="assets/videos/video_002.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Motion Poster</div>
-      </div>
-<div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_046.jpg">
-          <source src="assets/videos/video_003.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Motion Poster</div>
-      </div>
-<div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_047.jpg">
-          <source src="assets/videos/video_004.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Motion Poster</div>
-      </div>
-    </div>
-</div>
-<div class="portfolio-subanchor" id="pfs-motion-graphics"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-video-grid reveal-stagger">
-      <div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_048.jpg">
-          <source src="assets/videos/video_005.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Motion Graphics</div>
-      </div>
-    </div>
-</div>
-<div class="portfolio-subanchor" id="pfs-video-editing"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-video-grid reveal-stagger">
-      <div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_049.jpg">
-          <source src="assets/videos/video_006.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Video Editing</div>
-      </div>
-      <div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_050.jpg">
-          <source src="assets/videos/video_007.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Video Editing</div>
-      </div>
-      <div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_051.jpg">
-          <source src="assets/videos/video_008.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Video Editing</div>
-      </div>
-      <div class="portfolio-video-card">
-        <video controls preload="metadata" playsinline poster="assets/images/image_052.jpg">
-          <source src="assets/videos/video_009.mp4" type="video/mp4">
-        </video>
-        <div class="pc-tag video-tag">Video Editing</div>
-      </div>
-    </div>
-</div>
-
-    </div>
-
-<div class="portfolio-anchor" id="pf-print"></div>
-    <div class="portfolio-collapse">
-<div class="portfolio-subtabs reveal">
-<button data-subtarget="pfs-backdrop-design">Backdrop Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-<button data-subtarget="pfs-ticket-design">Ticket Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-<button data-subtarget="pfs-newspaper-ads">Newspaper Ads<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-<button data-subtarget="pfs-brochure-design">Brochure Design<span class="subtoggle-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></button>
-</div>
-<div class="portfolio-subanchor" id="pfs-backdrop-design"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-grid reveal-stagger">
-            <div class="portfolio-card">
-        <img src="assets/images/image_053.jpg" alt="Vitthal Sawla Maza devotional stage backdrop design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Stage Backdrop</div>
-        </div>
-      </div>
-            <div class="portfolio-card">
-        <img src="assets/images/image_054.jpg" alt="Mahesh Kale Swargamandhya stage backdrop design, Alibaug">
-        <div class="pc-overlay">
-          <div class="pc-tag">Stage Backdrop</div>
-        </div>
-      </div>
-    </div>
-</div>
-<div class="portfolio-subanchor" id="pfs-ticket-design"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-grid reveal-stagger">
-      <div class="portfolio-card">
-        <img src="assets/images/image_055.jpg" alt="Geet Ramayan event ticket design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Ticket Design</div>
-        </div>
-      </div>
-    </div>
-</div>
-<div class="portfolio-subanchor" id="pfs-newspaper-ads"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-grid reveal-stagger">
-            <div class="portfolio-card">
-        <img src="assets/images/image_056.jpg" alt="Vitthal Sawla Majha newspaper advertisement, Dadar">
-        <div class="pc-overlay">
-          <div class="pc-tag">Newspaper Ad</div>
-        </div>
-      </div>
-            <div class="portfolio-card">
-        <img src="assets/images/image_057.jpg" alt="Swarotsav Marathicha newspaper advertisement, Matunga">
-        <div class="pc-overlay">
-          <div class="pc-tag">Newspaper Ad</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_058.jpg" alt="Shabdhanchya Palikadle newspaper advertisement">
-        <div class="pc-overlay">
-          <div class="pc-tag">Newspaper Ad</div>
-        </div>
-      </div>
-    </div>
-</div>
-<div class="portfolio-subanchor" id="pfs-brochure-design"></div>
-<div class="portfolio-collapse">
-<div class="portfolio-grid reveal-stagger">
-      <div class="portfolio-card">
-        <img src="assets/images/image_059.jpg" alt="Sur Rahi brochure cover design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brochure Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_060.jpg" alt="Sur Rahi brochure open spread design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brochure Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_061.jpg" alt="Alexa Enterprises brochure cover design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brochure Design</div>
-        </div>
-      </div>
-      <div class="portfolio-card">
-        <img src="assets/images/image_062.jpg" alt="Alexa Enterprises brochure open spread design">
-        <div class="pc-overlay">
-          <div class="pc-tag">Brochure Design</div>
-        </div>
-      </div>
-    </div>
-</div>
-
-    </div>
-
-
+    <h2 class="section-title reveal in-view">Post Production</h2>
   </div>
 </section>
 </div>
@@ -1620,14 +1286,14 @@
 <section style="background:var(--off);">
   <div class="container">
     <div class="section-tag reveal">Why Hriddhix</div>
-    <h2 class="section-title reveal">Why brands choose to work with us.</h2>
+    <h2 class="section-title reveal">Why brands choose to create with us.</h2>
     <div class="feature-grid reveal-stagger">
-      <div class="feature-card"><div class="f-num">01</div><h4>Creative Excellence</h4><p>Every concept is pushed past the obvious answer until it feels distinctly yours.</p></div>
-      <div class="feature-card"><div class="f-num">02</div><h4>Premium Design Quality</h4><p>Meticulous craft in typography, spacing, and finish across every deliverable.</p></div>
-      <div class="feature-card"><div class="f-num">03</div><h4>Fast Delivery</h4><p>Efficient process without shortcuts, momentum that respects the work.</p></div>
-      <div class="feature-card"><div class="f-num">04</div><h4>Business-Oriented Solutions</h4><p>Design decisions tied to outcomes, not trends for their own sake.</p></div>
-      <div class="feature-card"><div class="f-num">05</div><h4>Attention to Detail</h4><p>Nothing ships until every pixel earns its place.</p></div>
-      <div class="feature-card"><div class="f-num">06</div><h4>Long-Term Creative Partnership</h4><p>We grow with your brand, not just a single project.</p></div>
+      <div class="feature-card"><div class="f-num">01</div><h4>Creative Vision</h4><p>Every production begins with a clear creative direction, shaped around your brand, audience, and objectives.</p></div>
+      <div class="feature-card"><div class="f-num">02</div><h4>Cinematic Quality</h4><p>We focus on thoughtful framing, professional lighting, and compelling visuals that elevate every shot.</p></div>
+      <div class="feature-card"><div class="f-num">03</div><h4>Professional Execution</h4><p>From pre-production planning to on-set coordination, we ensure every detail is handled with precision.</p></div>
+      <div class="feature-card"><div class="f-num">04</div><h4>Story-Driven Production</h4><p>We turn ideas into engaging visual stories that communicate your message and capture attention.</p></div>
+      <div class="feature-card"><div class="f-num">05</div><h4>Attention to Every Frame</h4><p>Every shot, scene, and visual detail is carefully considered to maintain a consistent production standard.</p></div>
+      <div class="feature-card"><div class="f-num">06</div><h4>Collaborative Partnership</h4><p>We work closely with your team throughout the production process to bring your vision to life.</p></div>
     </div>
   </div>
 </section>
@@ -1636,15 +1302,15 @@
 <section>
   <div class="container">
     <div class="section-tag reveal">Our Process</div>
-    <h2 class="section-title reveal">How We Work</h2>
+    <h2 class="section-title reveal">From concept to final frame.</h2>
     <div class="process-track">
       <div class="process-line"><div class="process-line-fill" id="processFill"></div></div>
       <div class="process-steps">
-        <div class="process-step"><div class="p-dot">01</div><h4>Discover</h4><p>Understanding your brand, goals, and audience from the ground up.</p></div>
-        <div class="process-step"><div class="p-dot">02</div><h4>Research</h4><p>Studying the market and competitors to find real opportunity.</p></div>
-        <div class="process-step"><div class="p-dot">03</div><h4>Design</h4><p>Translating strategy into distinctive, purposeful visuals.</p></div>
-        <div class="process-step"><div class="p-dot">04</div><h4>Refine</h4><p>Sharpening every detail through focused rounds of feedback.</p></div>
-        <div class="process-step"><div class="p-dot">05</div><h4>Deliver</h4><p>Handing off polished, production-ready brand assets.</p></div>
+        <div class="process-step"><div class="p-dot">01</div><h4>Discover</h4><p>Understanding your brand, objectives, audience, and vision to define the direction of the production.</p></div>
+        <div class="process-step"><div class="p-dot">02</div><h4>Conceptualize</h4><p>Developing creative concepts, scripts, and visual ideas that shape the story and define the film’s direction.</p></div>
+        <div class="process-step"><div class="p-dot">03</div><h4>Pre-Production</h4><p>Planning locations, shot lists, equipment, schedules, and production requirements before the shoot begins.</p></div>
+        <div class="process-step"><div class="p-dot">04</div><h4>Production</h4><p>Bringing the vision to life through professional filming, camera work, lighting, and on-set direction.</p></div>
+        <div class="process-step"><div class="p-dot">05</div><h4>Final Delivery</h4><p>Reviewing the footage, completing the agreed post-production, and delivering polished, ready-to-use video content.</p></div>
       </div>
     </div>
   </div>
@@ -1662,94 +1328,94 @@
     <div class="logo-marquee-track" id="testiTrack">
       <!-- set 1 -->
       <div class="testi-card">
-        <div class="logo-wrap"><img src="assets/images/image_063.png" alt="Darya Water Sports logo"></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">From the very first discussion, Hriddhix understood exactly what our brand needed. They didn't just create attractive designs, they created visuals that reflected our identity and connected with our audience. Their communication was clear, deadlines were always met, and every revision was handled with patience.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. PRATHAMESH CHOGALE</div>
-        <div class="testi-role">Owner, Darya Water Sports</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card">
-        <div class="logo-wrap"><img src="assets/images/image_064.png" alt="Govalkar Laboratory logo"></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">We were looking for a clean, professional visual identity that truly represented our organization, and Hriddhix delivered beyond our expectations. Every design was thoughtfully crafted, with attention to detail and consistency across all materials.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.</p>
         <div class="testi-meta">
-        <div class="testi-name">MRS. PRAJAKTA GOVALKAR</div>
-        <div class="testi-role">Managing Director, Govalkar Laboratory</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card">
-        <div class="logo-wrap"><img src="assets/images/image_079.png" alt="That Quiet Studio logo"></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">What impressed us the most was Hriddhix's approach to understanding our business before starting the design process. They didn't simply execute instructions, they contributed Ideas that genuinely improved the final result. Every creative felt modern, purposeful, and aligned with our brand identity.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. SIDDHESH MAHNTONGOL</div>
-        <div class="testi-role">Founder, That Quiet Studio</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card">
-        <div class="logo-wrap"><img src="assets/images/image_067.png" alt="Shree Samarth Kala Mandir logo"></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">Hriddhix helped us transform our ideas into visuals that were both creative and impactful. Their team maintained excellent communication throughout the project and delivered every asset with great attention to detail. The final outcome exceeded our expectations.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. ROHAN BULLU</div>
-        <div class="testi-role">Director, Shree Samarth Kala Mandir</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card">
-        <div class="logo-wrap"><img src="assets/images/image_069.png" alt="M Fitness Culture logo"></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">Working with HRIDDHIX was a great experience. The team understood our vision and transformed it into clean, impactful visuals that truly represent M Fitness Culture. Their creativity, attention to detail, and professionalism made the entire process smooth. Highly recommended for anyone looking for quality design and creative work.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. SHUBHAM BHOLE</div>
-        <div class="testi-role">Director, M Fitness Culture</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <!-- set 2 (duplicate for seamless loop) -->
       <div class="testi-card" aria-hidden="true">
-        <div class="logo-wrap"><img src="assets/images/image_070.png" alt=""></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">From the very first discussion, Hriddhix understood exactly what our brand needed. They didn't just create attractive designs, they created visuals that reflected our identity and connected with our audience. Their communication was clear, deadlines were always met, and every revision was handled with patience.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. PRATHAMESH CHOGALE</div>
-        <div class="testi-role">Owner, Darya Water Sports</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <div class="logo-wrap"><img src="assets/images/image_071.png" alt=""></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">We were looking for a clean, professional visual identity that truly represented our organization, and Hriddhix delivered beyond our expectations. Every design was thoughtfully crafted, with attention to detail and consistency across all materials.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.</p>
         <div class="testi-meta">
-        <div class="testi-name">MRS. PRAJAKTA GOVALKAR</div>
-        <div class="testi-role">Managing Director, Govalkar Laboratory</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <div class="logo-wrap"><img src="assets/images/image_080.png" alt=""></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">What impressed us the most was Hriddhix's approach to understanding our business before starting the design process. They didn't simply execute instructions, they contributed Ideas that genuinely improved the final result. Every creative felt modern, purposeful, and aligned with our brand identity.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. SIDDHESH MAHNTONGOL</div>
-        <div class="testi-role">Founder, That Quiet Studio</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <div class="logo-wrap"><img src="assets/images/image_074.png" alt=""></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">Hriddhix helped us transform our ideas into visuals that were both creative and impactful. Their team maintained excellent communication throughout the project and delivered every asset with great attention to detail. The final outcome exceeded our expectations.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. ROHAN BULLU</div>
-        <div class="testi-role">Director, Shree Samarth Kala Mandir</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
       <div class="testi-card" aria-hidden="true">
-        <div class="logo-wrap"><img src="assets/images/image_076.png" alt="M Fitness Culture logo"></div>
+        <div class="logo-wrap"><span class="logo-placeholder">LOREM IPSUM</span></div>
         <span class="quote-mark">&ldquo;</span>
-        <p class="quote-text">Working with HRIDDHIX was a great experience. The team understood our vision and transformed it into clean, impactful visuals that truly represent M Fitness Culture. Their creativity, attention to detail, and professionalism made the entire process smooth. Highly recommended for anyone looking for quality design and creative work.</p>
+        <p class="quote-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
         <div class="testi-meta">
-        <div class="testi-name">MR. SHUBHAM BHOLE</div>
-        <div class="testi-role">Director, M Fitness Culture</div>
+        <div class="testi-name">LOREM IPSUM</div>
+        <div class="testi-role">LOREM IPSUM</div>
       </div>
       </div>
     </div>
@@ -1762,8 +1428,8 @@
     <img class="contact-logo" id="contactLogo" src="assets/images/image_077.png" alt="Hriddhix">
     <div class="contact-left">
       <div class="section-tag" style="color:#FFFFFF;">Contact Us</div>
-      <h2>Let's Build Something Great Together!</h2>
-      <p>Whether you're starting a new business or refreshing your brand, We'd love to hear about your project.</p>
+      <h2>Let's Create Something Extraordinary.</h2>
+      <p>Have a project in mind? From cinematic films to compelling brand stories and commercial productions, let's bring your vision to life through powerful visual storytelling. We'd love to hear what you're creating.</p>
       <div class="cta-row">
         <a href="https://wa.me/918169657724?text=Hi%20Hrishi!%F0%9F%91%8B%0AI%27m%20interested%20in%20your%20design%20services.%20I%20have%20a%20project%20requirement%20and%20would%20like%20to%20discuss%20it%20with%20you" target="_blank" rel="noopener" class="submit-btn">
           <svg width="18" height="18" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.3-63.3-28.3-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.5 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
@@ -2044,236 +1710,6 @@
     });
   }, {threshold:.3});
   if(processTrack) processObserver.observe(processTrack);
-
-  // Portfolio: the black pill tabs are now the only controls. Each tab opens
-  // its panel (via the matching invisible anchor + the collapse right after
-  // it), closes any other open panel, and scrolls to it.
-  (function setupPortfolioTabs(){
-    const tabs = document.querySelectorAll('.portfolio-tabs button');
-    if (!tabs.length) return;
-
-    function getPanel(anchor){
-      const panel = anchor && anchor.nextElementSibling;
-      return (panel && panel.classList.contains('portfolio-collapse')) ? panel : null;
-    }
-    function closePanel(anchor){
-      const panel = getPanel(anchor);
-      if (!panel) return;
-      resetVideosWithin(panel);
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-      requestAnimationFrame(() => { panel.style.maxHeight = '0px'; });
-      anchor.dataset.open = '0';
-    }
-    // Collapses instantly (no transition) so layout is final before we measure scroll position
-    function closePanelInstant(anchor){
-      const panel = getPanel(anchor);
-      if (!panel) return;
-      resetVideosWithin(panel);
-      const prevTransition = panel.style.transition;
-      panel.style.transition = 'none';
-      panel.style.maxHeight = '0px';
-      void panel.offsetHeight; // force reflow so the collapse applies immediately
-      panel.style.transition = prevTransition;
-      anchor.dataset.open = '0';
-    }
-    function openPanel(anchor){
-      const panel = getPanel(anchor);
-      if (!panel) return;
-      anchor.dataset.open = '1';
-      panel.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('in-view'));
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-      requestAnimationFrame(() => { panel.style.maxHeight = panel.scrollHeight + 'px'; });
-      setTimeout(() => {
-        if (anchor.dataset.open === '1') panel.style.maxHeight = panel.scrollHeight + 'px';
-      }, 300);
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const targetId = tab.getAttribute('data-target');
-        const anchor = document.getElementById(targetId);
-        if (!anchor) return;
-
-        const alreadyOpen = anchor.dataset.open === '1';
-
-        tabs.forEach(t => t.classList.remove('active'));
-        // close any other open panel instantly first, so the page layout is
-        // final before we measure where to scroll to
-        document.querySelectorAll('.portfolio-anchor').forEach(a => { if (a !== anchor) closePanelInstant(a); });
-
-        if (alreadyOpen) {
-          closePanel(anchor);
-        } else {
-          tab.classList.add('active');
-          openPanel(anchor);
-        }
-        // Intentionally no scrollIntoView / window.scrollTo / focus here —
-        // the panel already renders directly below its tab row, and the
-        // page must stay at the exact scroll position the user was at.
-      });
-    });
-
-    // keep the open panel sized correctly on resize
-    window.addEventListener('resize', () => {
-      document.querySelectorAll('.portfolio-anchor').forEach(anchor => {
-        if (anchor.dataset.open === '1') {
-          const panel = getPanel(anchor);
-          if (panel) panel.style.maxHeight = panel.scrollHeight + 'px';
-        }
-      });
-    });
-  })();
-
-  // Portfolio subsection tabs (e.g. "Poster Design", "Motion Poster") — each
-  // group starts with its subsections collapsed; tapping one expands just
-  // that subsection and re-measures its parent group panel so nothing clips.
-  (function setupPortfolioSubtabs(){
-    const subtabs = document.querySelectorAll('.portfolio-subtabs button');
-    if (!subtabs.length) return;
-
-    function getSubPanel(subanchor){
-      const panel = subanchor && subanchor.nextElementSibling;
-      return (panel && panel.classList.contains('portfolio-collapse')) ? panel : null;
-    }
-    function resizeAncestorPanels(el){
-      let node = el.parentElement;
-      while (node) {
-        if (node.classList && node.classList.contains('portfolio-collapse') && node.style.maxHeight && node.style.maxHeight !== '0px') {
-          node.style.maxHeight = node.scrollHeight + 'px';
-        }
-        node = node.parentElement;
-      }
-    }
-
-    function closeSubtab(btn, panel){
-      resetVideosWithin(panel);
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-      requestAnimationFrame(() => {
-        panel.style.maxHeight = '0px';
-        resizeAncestorPanels(panel);
-      });
-      btn.classList.remove('open');
-    }
-    function openSubtab(btn, panel){
-      btn.classList.add('open');
-      panel.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('in-view'));
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-      resizeAncestorPanels(panel);
-      requestAnimationFrame(() => {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
-        resizeAncestorPanels(panel);
-      });
-      setTimeout(() => {
-        if (btn.classList.contains('open')) {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-          resizeAncestorPanels(panel);
-        }
-      }, 300);
-    }
-
-    subtabs.forEach(btn => {
-      const subanchor = document.getElementById(btn.getAttribute('data-subtarget'));
-      const panel = getSubPanel(subanchor);
-      if (!panel) return;
-      const row = btn.closest('.portfolio-subtabs');
-
-      btn.addEventListener('click', () => {
-        const isOpen = btn.classList.contains('open');
-
-        // close any other open subtab in the same group's row first
-        if (row) {
-          row.querySelectorAll('button.open').forEach(otherBtn => {
-            if (otherBtn === btn) return;
-            const otherAnchor = document.getElementById(otherBtn.getAttribute('data-subtarget'));
-            const otherPanel = getSubPanel(otherAnchor);
-            if (otherPanel) closeSubtab(otherBtn, otherPanel);
-          });
-        }
-
-        if (isOpen) {
-          closeSubtab(btn, panel);
-        } else {
-          openSubtab(btn, panel);
-        }
-      });
-    });
-  })();
-
-  // Populate the "All" portfolio grid by cloning cards from every category,
-  // interleaved so images and videos are mixed rather than grouped.
-  (function buildAllGrid(){
-    const allGrid = document.getElementById('portfolioAllGrid');
-    if (!allGrid) return;
-    const imgCards = Array.from(document.querySelectorAll('.portfolio-card')).map(el => el.cloneNode(true));
-    const vidCards = Array.from(document.querySelectorAll('.portfolio-video-card')).map(el => el.cloneNode(true));
-
-    // simple deterministic shuffle so the mix looks varied but is stable on reload
-    function shuffle(arr, seed){
-      let s = seed;
-      const rand = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(rand() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
-    }
-    shuffle(imgCards, 7);
-    shuffle(vidCards, 13);
-
-    const mixed = [];
-    let vi = 0;
-    imgCards.forEach((card, i) => {
-      mixed.push(card);
-      if ((i + 1) % 3 === 0 && vi < vidCards.length) {
-        mixed.push(vidCards[vi]);
-        vi++;
-      }
-    });
-    while (vi < vidCards.length) { mixed.push(vidCards[vi]); vi++; }
-
-    mixed.forEach(card => allGrid.appendChild(card));
-  })();
-
-  // Open the "All" portfolio panel by default so it's active and visible as
-  // soon as the Portfolio section loads, without requiring a click. Runs
-  // after the All grid is built above. All other panels remain closed/unchanged.
-  (function openAllPanelByDefault(){
-    const anchor = document.getElementById('pf-all');
-    if (!anchor) return;
-    const panel = anchor.nextElementSibling;
-    if (!panel || !panel.classList.contains('portfolio-collapse')) return;
-    anchor.dataset.open = '1';
-    panel.querySelectorAll('.reveal, .reveal-stagger').forEach(el => el.classList.add('in-view'));
-
-    // Use 'none' rather than a scrollHeight snapshot: at this point the grid's
-    // images have just been inserted and haven't finished loading yet, so
-    // scrollHeight would measure a too-small height and clip the images into
-    // thin strips (max-height + overflow:hidden on .portfolio-collapse). 'none'
-    // lets the panel size itself to its real content, including images that
-    // load progressively, with no cropping.
-    panel.style.maxHeight = 'none';
-
-    // Once every image in the panel has actually loaded, re-measure with a
-    // concrete pixel value so this panel behaves identically to any other
-    // panel the user opens by clicking a tab (consistent for the resize
-    // handler and for closing it again via the "All" tab).
-    const imgs = Array.from(panel.querySelectorAll('img'));
-    let pending = imgs.filter(img => !img.complete).length;
-    function finalize(){
-      if (anchor.dataset.open === '1') panel.style.maxHeight = panel.scrollHeight + 'px';
-    }
-    if (pending === 0) {
-      finalize();
-    } else {
-      imgs.forEach(img => {
-        if (img.complete) return;
-        img.addEventListener('load', () => { pending--; if (pending === 0) finalize(); });
-        img.addEventListener('error', () => { pending--; if (pending === 0) finalize(); });
-      });
-      // Safety net in case some 'load' events are missed
-      window.addEventListener('load', finalize, { once: true });
-    }
-  })();
 
   // Portfolio image lightbox
   const lightbox = document.getElementById('lightbox');
